@@ -1,7 +1,11 @@
+import LayoutContainer from "container/LayoutContainer";
+
 function HomePage() {
   return (
     <div>
-      <h1>홈</h1>
+      <LayoutContainer>
+        <></>
+      </LayoutContainer>
     </div>
   );
 }
