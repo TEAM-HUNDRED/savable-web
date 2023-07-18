@@ -1,10 +1,13 @@
+import { HEADER_CONFIG } from "config";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
-type Props = {
-  title: string;
-};
+function Header() {
+  const location = useLocation();
 
-function Header({ title }: Props) {
+  const basicPath = "/" + location.pathname.split("/")[1];
+  const title = HEADER_CONFIG[basicPath].name;
+
   return (
     <Container>
       <TitleText>{title}</TitleText>
@@ -25,7 +28,7 @@ const Container = styled.div`
 const TitleText = styled.p`
   max-width: 725px;
   font-size: 16px;
-  weight: bold;
+  margin: 0px;
 `;
 
 export default Header;

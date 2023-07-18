@@ -4,6 +4,7 @@ import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import HomePage from "pages/HomePage";
+import LayoutContainer from "container/LayoutContainer";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -12,7 +13,11 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<LayoutContainer />}>
+          <Route path="" element={<HomePage />} />
+          <Route path="ranking" element={<HomePage />} />
+          <Route path="challenge" element={<HomePage />} />
+        </Route>
       </Routes>
     </Router>
   </React.StrictMode>

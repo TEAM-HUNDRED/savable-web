@@ -1,15 +1,16 @@
+import BottomNavigationBar from "components/BottomNavigationBar";
 import Header from "components/Header";
+import { Outlet } from "react-router-dom";
 import styled from "styled-components";
 
-type Props = {
-  children: React.ReactNode;
-};
-
-function LayoutContainer({ children }: Props) {
+function LayoutContainer() {
   return (
     <Container>
-      <Header title={"챌린지 현황"} />
-      <ContentContainer>{children}</ContentContainer>
+      <Header />
+      <ContentContainer>
+        <Outlet />
+      </ContentContainer>
+      <BottomNavigationBar />
     </Container>
   );
 }
@@ -20,19 +21,22 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  margin: 0 auto;
+  margin: 0;
   box-sizing: border-box;
-  overflow: hidden;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const ContentContainer = styled.div`
-  position: relative;
   flex: 1;
+  position: relative;
   overflow: overlay;
   box-sizing: border-box;
   max-width: 768px;
   width: 100%;
   height: 100%;
+  padding: 28px 24px;
   ::-webkit-scrollbar {
     display: none;
   }
