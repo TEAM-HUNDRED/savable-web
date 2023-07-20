@@ -5,6 +5,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import HomePage from "pages/HomePage";
 import ChallengePage from "pages/ChallengePage";
+import RankingPage from "pages/RankingPage";
 
 import LayoutContainer from "container/LayoutContainer";
 
@@ -17,7 +18,7 @@ root.render(
       <Routes>
         <Route path="/" element={<LayoutContainer />}>
           <Route path="" element={<HomePage />} />
-          <Route path="ranking" element={<HomePage />} />
+          <Route path="ranking" element={<RankingPage />} />
           <Route path="challenge" element={<ChallengePage />} />
         </Route>
       </Routes>
