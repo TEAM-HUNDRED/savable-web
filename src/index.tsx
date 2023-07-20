@@ -1,9 +1,11 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.css";
 import reportWebVitals from "./reportWebVitals";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+
 import HomePage from "pages/HomePage";
+import ChallengePage from "pages/ChallengePage";
+
 import LayoutContainer from "container/LayoutContainer";
 
 const root = ReactDOM.createRoot(
@@ -16,7 +18,7 @@ root.render(
         <Route path="/" element={<LayoutContainer />}>
           <Route path="" element={<HomePage />} />
           <Route path="ranking" element={<HomePage />} />
-          <Route path="challenge" element={<HomePage />} />
+          <Route path="challenge" element={<ChallengePage />} />
         </Route>
       </Routes>
     </Router>
