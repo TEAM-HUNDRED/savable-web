@@ -1,16 +1,17 @@
 import styled from "styled-components";
 
+import SavingHeader from "components/SavingHeader";
+
 function HomePage() {
   return (
-    <div>
-      <ButtonIndexText>홈페이지 입니다</ButtonIndexText>
-    </div>
+    <Container>
+      <SavingHeader />
+    </Container>
   );
 }
 
-const ButtonIndexText = styled.p`
-  font-size: 40px;
-  weight: bold;
+const Container = styled.div`
+  width: 100%;
 `;
 
 export default HomePage;
