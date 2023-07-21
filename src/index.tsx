@@ -16,7 +16,7 @@ const root = ReactDOM.createRoot(
 );
 
 axios.create({
-  baseURL: "http://13.209.177.55:8080",
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 root.render(

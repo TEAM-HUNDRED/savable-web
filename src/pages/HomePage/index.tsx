@@ -1,27 +1,43 @@
+import { useEffect, useState } from "react";
+import axios, { AxiosResponse } from "axios";
 import styled from "styled-components";
 
 import SavingHeader from "components/SavingHeader";
-import dotenv from "dotenv";
-import axios from "axios";
-import { useEffect } from "react";
-dotenv.config();
 
-console.log(process.env.REACT_APP_API_BASE_URL);
+type UserDataPropsType = {
+  username: string;
+  savedMoney: number;
+  reward: number;
+};
 
 function HomePage() {
+  const [userData, setUserData] = useState<UserDataPropsType>(
+    {} as UserDataPropsType
+  );
+
   const getUserData = async () => {
-    const response = await axios.get(
-      `/main?kakaoId=ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50`
-    );
-    console.log(response);
+    try {
+      const response: AxiosResponse<UserDataPropsType> = await axios.get(
+        `/main?kakaoId=ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50`
+      );
+
+      setUserData(response.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
     getUserData();
   }, []);
+
   return (
     <Container>
-      <SavingHeader />
+      <SavingHeader
+        reward={userData.reward}
+        savedMoney={userData.savedMoney}
+        username={userData.username}
+      />
     </Container>
   );
 }
