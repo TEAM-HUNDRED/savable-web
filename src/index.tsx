@@ -9,10 +9,15 @@ import ChallengeDetailPage from "pages/ChallengeDetailPage";
 import RankingPage from "pages/RankingPage";
 
 import LayoutContainer from "container/LayoutContainer";
+import axios from "axios";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
+
+axios.create({
+  baseURL: "http://13.209.177.55:8080",
+});
 
 root.render(
   <React.StrictMode>
