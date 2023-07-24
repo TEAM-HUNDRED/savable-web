@@ -1,19 +1,21 @@
 import { Images } from "assets/images";
 import styled from "styled-components";
 
-function SavingHeader() {
-  const savedMoney = "50,000원";
-  const reward = "1,000원";
-  const userName = "고영준";
+type PropsType = {
+  savedMoney: number;
+  reward: number;
+  username: string;
+};
 
+function SavingHeader({ savedMoney, reward, username }: PropsType) {
   return (
     <Container>
       <SavedMoneyContainer>
         <MoneyImage src={Images.money} />
-        <SavedMoneyText>{reward}</SavedMoneyText>
-        <ContentText>{`세이버 ${userName}님의\n 포인트 적립금`}</ContentText>
+        <SavedMoneyText>{`${reward.toLocaleString()}원`}</SavedMoneyText>
+        <ContentText>{`세이버 ${username}님의\n 포인트 적립금`}</ContentText>
       </SavedMoneyContainer>
-      <DescriptionText>{`7월에 ${savedMoney} 절약하고\n ${reward} 받았어요`}</DescriptionText>
+      <DescriptionText>{`7월에 ${`${savedMoney.toLocaleString()}원`} 절약하고\n ${`${reward.toLocaleString()}원`} 받았어요`}</DescriptionText>
       <Divider />
     </Container>
   );
