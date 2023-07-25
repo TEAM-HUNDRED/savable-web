@@ -1,11 +1,10 @@
-import axios, { AxiosInstance, AxiosStatic } from "axios";
+import axios, { AxiosStatic } from "axios";
 import { CreateOrderGiftPayload } from "types/api/base";
 
 import { ISVApi } from "./ISVApi";
 
 export default class ProductionApi implements ISVApi {
   static instance: ISVApi;
-  //   axios: AxiosInstance;
   _axios: AxiosStatic;
 
   private constructor() {

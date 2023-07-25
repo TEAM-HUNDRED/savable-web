@@ -3,6 +3,7 @@ import { ReactComponent as ChallengeIcon } from "./ic_challenge.svg";
 import { ReactComponent as HomeIcon } from "./ic_home.svg";
 import { ReactComponent as PlusIcon } from "./ic_plus.svg";
 import { ReactComponent as CoinIcon } from "./ic_coin.svg";
+import { ReactComponent as GiftIcon } from "./ic_gift.svg";
 
 export const Icons = {
   SvgElement: {
@@ -11,5 +12,6 @@ export const Icons = {
     challengeIcon: ChallengeIcon,
     plusIcon: PlusIcon,
     coinIcon: CoinIcon,
+    giftIcon: GiftIcon,
   },
 };

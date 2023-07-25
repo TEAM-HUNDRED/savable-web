@@ -2,7 +2,11 @@ import { Icons } from "assets/icons";
 
 export const BOTTOM_NAVIGATOR_CONFIG = [
   { name: "랭킹", IconElement: Icons.SvgElement.rankingIcon, url: "/ranking" },
-  { name: "홈", IconElement: Icons.SvgElement.homeIcon, url: "/" },
+  {
+    name: "세이버블 샵",
+    IconElement: Icons.SvgElement.giftIcon,
+    url: "/savable_shop",
+  },
   {
     name: "챌린지",
     IconElement: Icons.SvgElement.challengeIcon,
@@ -19,7 +23,7 @@ type HeaderConfigType = {
 };
 
 export const HEADER_CONFIG: HeaderConfigType = {
-  "/": { name: "절약 현황" },
+  "/savable_shop": { name: "세이버블 샵" },
   "/ranking": { name: "랭킹 현황" },
   "/challenge": { name: "챌린지 현황" },
 };
