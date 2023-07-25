@@ -13,7 +13,6 @@ type UserDataPropsType = {
 
 const kakaoId =
   "ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50";
-const giftCardId = 1;
 
 function HomePage() {
   const [userData, setUserData] = useState<UserDataPropsType>({
