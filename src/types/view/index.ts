@@ -14,6 +14,14 @@ export type GiftCardPropsType = {
   image: string;
 };
 
+export type UserChallengePropsType = {
+  title: string;
+  savedMoney: number;
+  reward: number;
+  username: string;
+  cnt: number;
+};
+
 export type ParticipatedChallengePropsType = {
   challengeId: number;
   certificationCnt: number;
@@ -32,4 +40,10 @@ export type UserRankingPropsType = {
 export type RankingPropsType = {
   username: string;
   certRank: number;
+};
+
+export type MemberInfoPropsType = {
+  savedMoney: number;
+  reward: number;
+  username: string;
 };
