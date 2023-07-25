@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosResponse } from "axios";
 import styled from "styled-components";
+
+import Api from "lib/api/Api";
 
 import SavingHeader from "components/SavingHeader";
 
@@ -10,16 +11,20 @@ type UserDataPropsType = {
   reward: number;
 };
 
+const kakaoId =
+  "ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50";
+const giftCardId = 1;
+
 function HomePage() {
-  const [userData, setUserData] = useState<UserDataPropsType>(
-    {} as UserDataPropsType
-  );
+  const [userData, setUserData] = useState<UserDataPropsType>({
+    reward: 10,
+    username: "d",
+    savedMoney: 10,
+  } as UserDataPropsType);
 
   const getUserData = async () => {
     try {
-      const response: AxiosResponse<UserDataPropsType> = await axios.get(
-        `/main?kakaoId=ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50`
-      );
+      const response = await Api.shared.getUserSavingStatus(kakaoId);
 
       setUserData(response.data);
     } catch (error) {
