@@ -4,36 +4,33 @@ import styled from "styled-components";
 import Api from "lib/api/Api";
 
 import SavingHeader from "components/SavingHeader";
-
-type UserDataPropsType = {
-  username: string;
-  savedMoney: number;
-  reward: number;
-};
+import { GiftCardPropsType, MemberPropsType } from "types/view";
 
 const kakaoId =
   "ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50";
 
-function HomePage() {
-  const [userData, setUserData] = useState<UserDataPropsType>({
-    reward: 10,
-    username: "d",
-    savedMoney: 10,
-  } as UserDataPropsType);
+function SavableShopPage() {
+  const [userData, setUserData] = useState<MemberPropsType>();
+  const [giftIconList, setGiftIconList] = useState<{
+    [key: string]: GiftCardPropsType[];
+  }>();
 
-  const getUserData = async () => {
+  const getGiftCardList = async () => {
     try {
-      const response = await Api.shared.getUserSavingStatus(kakaoId);
+      const response = await Api.shared.getGifticonList(kakaoId);
 
-      setUserData(response.data);
+      setUserData(response.data.member);
+      setGiftIconList(response.data.giftcards);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    getUserData();
+    getGiftCardList();
   }, []);
+
+  if (!userData || !giftIconList) return <></>;
 
   return (
     <Container>
@@ -50,4 +47,4 @@ const Container = styled.div`
   width: 100%;
 `;
 
-export default HomePage;
+export default SavableShopPage;

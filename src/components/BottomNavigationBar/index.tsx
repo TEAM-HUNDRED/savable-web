@@ -14,6 +14,8 @@ function BottomNavigationBar() {
   useEffect(() => {
     BOTTOM_NAVIGATOR_CONFIG.map((item, idx) => {
       if (basicPath === item.url) setCurrentIndex(idx);
+
+      return undefined;
     });
   }, [basicPath]);
 

@@ -3,10 +3,10 @@ import ReactDOM from "react-dom/client";
 import reportWebVitals from "./reportWebVitals";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
-import HomePage from "pages/HomePage";
 import ChallengePage from "pages/ChallengePage";
 import ChallengeDetailPage from "pages/ChallengeDetailPage";
 import RankingPage from "pages/RankingPage";
+import SavableShopPage from "pages/SavableShopPage";
 
 import LayoutContainer from "container/LayoutContainer";
 import axios from "axios";
@@ -25,7 +25,7 @@ root.render(
   <Router>
     <Routes>
       <Route path="/" element={<LayoutContainer />}>
-        <Route path="" element={<HomePage />} />
+        <Route path="savable-shop" element={<SavableShopPage />} />
         <Route path="ranking" element={<RankingPage />} />
         <Route path="challenge" element={<ChallengePage />} />
         <Route path="challenge/detail" element={<ChallengeDetailPage />} />
