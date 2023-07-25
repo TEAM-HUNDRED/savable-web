@@ -20,3 +20,16 @@ export type ParticipatedChallengePropsType = {
   startDate: string;
   endDate: null;
 };
+
+export type UserRankingPropsType = {
+  username: string;
+  certRank: number;
+  certNum: number;
+  gap: number;
+  savedMoney: number;
+};
+
+export type RankingPropsType = {
+  username: string;
+  certRank: number;
+};
