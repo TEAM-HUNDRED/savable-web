@@ -1,4 +1,4 @@
-import axios, { AxiosInstance, AxiosStatic } from "axios";
+import axios, { AxiosStatic } from "axios";
 import { CreateOrderGiftPayload } from "types/api/base";
 
 import { ISVApi } from "./ISVApi";
