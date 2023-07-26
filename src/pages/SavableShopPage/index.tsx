@@ -51,6 +51,7 @@ function SavableShopPage() {
               priceRange={Number(item)}
               giftCardList={giftIconList[item]}
               userReward={userData.reward}
+              kakaoId={kakaoId}
             />
           );
         })}

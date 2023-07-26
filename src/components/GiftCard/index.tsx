@@ -4,13 +4,22 @@ import styled from "styled-components";
 import { GiftCardPropsType } from "types/view";
 
 type PropsType = GiftCardPropsType & {
-  canPurchase: boolean;
+  kakaoId: string;
+  userReward: number;
 };
 
-function GiftCard({ id, name, price, image, canPurchase }: PropsType) {
+function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
   const navigate = useNavigate();
   const onClickPurchaseButton = () => {
-    navigate("/savable_shop/order");
+    navigate("/savable_shop/order", {
+      state: {
+        kakaoId: kakaoId,
+        giftcardId: id,
+        gifticonName: name,
+        price: price,
+        userReward: userReward,
+      },
+    });
   };
 
   return (
@@ -23,7 +32,7 @@ function GiftCard({ id, name, price, image, canPurchase }: PropsType) {
         </TextContainer>
         <PurchaseButton
           onClick={onClickPurchaseButton}
-          canPurchase={canPurchase}
+          canPurchase={userReward >= price}
         >
           <ButtonText>{`구매하기`}</ButtonText>
         </PurchaseButton>

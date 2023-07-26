@@ -1,56 +1,95 @@
-import { useLocation, Link } from "react-router-dom";
+import { ChangeEvent, useState } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-import { UserChallengePropsType } from "types/view";
 import { Icons } from "assets/icons";
 
-import StampContainer from "container/StampContainer";
 import BottomNavigationBar from "components/BottomNavigationBar";
-import { Images } from "assets/images";
-import { useState } from "react";
+import CreateOrderInputCard from "components/CreateOrderInputCard";
+import Api from "lib/api/Api";
+import { CreateOrderGiftPayload } from "types/api/base";
 
 function SavableShopOrderPage() {
+  const navigate = useNavigate();
   const location = useLocation();
 
-  const [title, setTitle] = useState<string>("");
-  const [content, setContent] = useState<string>("");
+  const { kakaoId, giftcardId, gifticonName, price, userReward } =
+    location.state;
+
+  const [quantity, setQuantity] = useState<number>();
+  const [phoneNumber, setPhoneNumber] = useState<string>("");
+  const [positivePoints, setPositivePoints] = useState<string>("");
+  const [negativePoints, setNegativePoints] = useState<string>("");
+
+  const [isFocus, setIsFocus] = useState<boolean>(false);
+
+  const quantityInput = {
+    label: `${gifticonName} (${price.toLocaleString()}원) 구매 수량`,
+    placeholder: "구매할 기프티콘의 수량을 적어주세요",
+    limitLength: 24,
+    limitRow: 1,
+    value: quantity,
+    onChangeValue: (e: ChangeEvent<HTMLInputElement>) =>
+      setQuantity(Number(e.target.value)),
+  };
 
   const inputCardList = [
     {
-      label: "제목",
-      placeholder: "제목을 작성해주세요",
-      limitLength: 24,
+      label: "전화번호",
+      placeholder: "전화번호를 작성해주세요",
+      value: phoneNumber,
       limitRow: 1,
-      value: title,
-      onChangeValue: (value: string) => setTitle(value),
+      onChangeValue: (value: string) => setPhoneNumber(value),
     },
     {
-      label: "열정 공유",
+      label: "좋았던 점을 적어주세요!",
       placeholder:
-        "나의 사업이야기, 사업에 대한 고민 등과 같이 자신의 열정이 담긴 글을 작성해주세요.\n열정이 담긴 글은 누군가에게 힘이 됩니다.\n서로에게 좋은 영향을 줄 수 있는 글을 작성해주세요.",
-      value: content,
-      onChangeValue: (value: string) => setContent(value),
+        "챌린지를 진행하면서 만족했거나, \n재밌었던 경험을 자유롭게 적어주세요!",
+      value: positivePoints,
+      onChangeValue: (value: string) => setPositivePoints(value),
+    },
+    {
+      label: "아쉬웠던 점을 적어주세요!",
+      placeholder: `챌린지를 진행하면서 불편했던 경험이나, \n이런 것이 있으면 더 좋았겠다라는 생각을 \n자유롭게 적어주세요!`,
+      value: negativePoints,
+      onChangeValue: (value: string) => setNegativePoints(value),
     },
   ];
 
-  //   const { title, savedMoney, reward, username, cnt }: UserChallengePropsType =
-  //     location.state.props;
-
-  //   const challengeStatus = [
-  //     {
-  //       title: "절약 금액",
-  //       content: `${savedMoney.toLocaleString()}원`,
-  //       icons: Images.piggyBankImage,
-  //     },
-  //     {
-  //       title: "세이버블 포인트",
-  //       content: `${reward.toLocaleString()}원`,
-  //       icons: Images.money,
-  //     },
-  //   ];
-
-  //   const titleText = `${title}로 \n ${savedMoney.toLocaleString()} 아끼고 ${reward.toLocaleString()} 벌었어요`;
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
+
+  const handleSubmit = async () => {
+    try {
+      const payload: CreateOrderGiftPayload = {
+        kakaoId: kakaoId,
+        giftcardId: giftcardId,
+        quantity: Number(quantity),
+        phoneNumber: phoneNumber,
+        positivePoints: positivePoints,
+        negativePoints: negativePoints,
+      };
+
+      await Api.shared.createOrder(payload);
+    } catch (error) {}
+  };
+
+  const verifyCanSubmit =
+    quantity &&
+    phoneNumber &&
+    positivePoints &&
+    negativePoints &&
+    userReward >= price * quantity;
+
+  const navigateToShop = () => {
+    navigate("/savable_shop", { state: { kakaoId: kakaoId } });
+  };
+
+  const onClickSubmitButton = () => {
+    if (verifyCanSubmit) {
+      navigateToShop();
+      handleSubmit();
+    }
+  };
 
   return (
     <Container>
@@ -62,23 +101,30 @@ function SavableShopOrderPage() {
         <div />
       </HeaderContainer>
       <ContentContainer>
-        {/* <TitleText>{titleText}</TitleText>
-        <ChallengeContainer>
-          {challengeStatus.map((item, idx) => {
-            return (
-              <StatusCard key={`${item.content} - ${idx}`}>
-                <ImageContainer>
-                  <Image src={item.icons} />
-                </ImageContainer>
-                <TextContainer>
-                  <IndexText>{item.title}</IndexText>
-                  <ValueText>{`${item.content}`}</ValueText>
-                </TextContainer>
-              </StatusCard>
-            );
-          })}
-        </ChallengeContainer>
-        <StampContainer cnt={cnt} /> */}
+        <LabelText isFocus={isFocus}>{quantityInput.label}</LabelText>
+        <InputBar
+          placeholder={quantityInput.placeholder}
+          value={quantity}
+          type={"number"}
+          onChange={quantityInput.onChangeValue}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+        />
+        {inputCardList.map((item, idx) => {
+          return (
+            <CreateOrderInputCard
+              key={`${item.label}-${idx}`}
+              label={item.label}
+              placeholder={item.placeholder}
+              value={item.value}
+              limitRow={item.limitRow}
+              onChangeValue={item.onChangeValue}
+            />
+          );
+        })}
+        <SubmitButton canSubmit onClick={onClickSubmitButton}>
+          <ButtonText>{"재출하고 구매하기"}</ButtonText>
+        </SubmitButton>
       </ContentContainer>
       <BottomNavigationBar />
     </Container>
@@ -126,65 +172,61 @@ const HeaderText = styled.p`
 
 const ContentContainer = styled.div`
   flex: 1;
-  width: 100%;
+  position: relative;
+  overflow: overlay;
+  box-sizing: border-box;
   padding: 28px 24px;
-  box-sizing: border-box;
+  max-width: 768px;
+  width: 100%;
+  height: 100%;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const ChallengeContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 36px;
+const LabelText = styled.p<{ isFocus: boolean }>`
+  margin: 0px;
+  color: ${(props) => (props.isFocus ? "#9BBE0F" : "#000000")};
+`;
+
+const InputBar = styled.input`
   width: 100%;
   box-sizing: border-box;
+  margin: 12px 0px;
+  padding: 16px;
+  border: 0px;
+  overflow: auto;
+  height: ${({ height }) => height};
+  caret-color: #e9f9ac;
+  border-top: 1px solid #e3e3e3;
+  border-bottom: 1px solid #e3e3e3;
+  resize: none;
+  line-height: 1.5rem;
+  ::placeholder {
+    color: #e9e8e8;
+  }
+  &:focus {
+    outline: none;
+    border-top: 1px solid #e9f9ac;
+    border-bottom: 1px solid #e9f9ac;
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
-const StatusCard = styled.div`
-  display: flex;
-  flex-direction: row;
-  padding: 0px 8px;
-  width: 136px;
-  height: 48px;
-  align-items: center;
-  box-sizing: border-box;
-`;
-
-const ImageContainer = styled.div`
-  display: flex;
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
-  background-color: #e9f9ac;
+const SubmitButton = styled.button<{ canSubmit: boolean }>`
+  width: 100%;
+  height: 40px;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  border: none;
+  background-color: ${(props) => (props.canSubmit ? "#e9f9ac" : "#e3e3e3")};
 `;
 
-const Image = styled.img`
-  width: 24px;
-  height: 24px;
-`;
-
-const TextContainer = styled.div`
-  margin-left: 6px;
-`;
-
-const IndexText = styled.p`
+const ButtonText = styled.p`
   margin: 0px;
-  font-size: 12px;
-  font-weight: 600;
-  white-space: pre-line;
-`;
-
-const ValueText = styled.p`
-  margin: 0px;
-  font-size: 16px;
-  font-weight: 700;
-  white-space: pre-line;
-`;
-
-const TitleText = styled.p`
-  margin: 0px;
-  margin-bottom: 12px;
   font-size: 16px;
   font-weight: 700;
   white-space: pre-line;

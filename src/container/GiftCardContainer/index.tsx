@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { GiftCardPropsType } from "types/view";
 
 type PropsType = {
+  kakaoId: string;
   priceRange: number;
   userReward: number;
   giftCardList: GiftCardPropsType[];
@@ -12,6 +13,7 @@ function GiftCardContainer({
   priceRange,
   giftCardList,
   userReward,
+  kakaoId,
 }: PropsType) {
   return (
     <Container>
@@ -25,7 +27,8 @@ function GiftCardContainer({
               name={item.name}
               price={item.price}
               image={item.image}
-              canPurchase={userReward >= item.price}
+              kakaoId={kakaoId}
+              userReward={userReward}
             />
           );
         })}
