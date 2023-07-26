@@ -9,22 +9,28 @@ import SavableShopPage from "pages/SavableShopPage";
 import SavableShopOrderPage from "pages/SavableShopOrderPage";
 
 import LayoutContainer from "container/LayoutContainer";
+import ToastProvider from "lib/context/ToastContext";
 
 Api.shared.load();
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<LayoutContainer />}>
-          <Route path="savable_shop" element={<SavableShopPage />} />
-          <Route path="ranking" element={<RankingPage />} />
-          <Route path="challenge" element={<ChallengePage />} />
-        </Route>
-        <Route path="/challenge/detail" element={<ChallengeDetailPage />} />
-        <Route path="/savable_shop/order" element={<SavableShopOrderPage />} />
-      </Routes>
-    </Router>
+    <ToastProvider>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LayoutContainer />}>
+            <Route path="savable_shop" element={<SavableShopPage />} />
+            <Route path="ranking" element={<RankingPage />} />
+            <Route path="challenge" element={<ChallengePage />} />
+          </Route>
+          <Route path="/challenge/detail" element={<ChallengeDetailPage />} />
+          <Route
+            path="/savable_shop/order"
+            element={<SavableShopOrderPage />}
+          />
+        </Routes>
+      </Router>
+    </ToastProvider>
   );
 }
 
