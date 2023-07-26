@@ -6,7 +6,7 @@ import { Images } from "assets/images";
 import SVButton from "components/SVButton";
 
 type PropsType = UserChallengePropsType & {
-  onClickDetailButton: (challengeId: number) => void;
+  onClickDetailButton: (props: UserChallengePropsType) => void;
   onClickCertificationButton: () => void;
 };
 
@@ -19,6 +19,16 @@ function ChallengeCard({
   onClickCertificationButton,
   onClickDetailButton,
 }: PropsType) {
+  const onClickDetail = () => {
+    onClickDetailButton({
+      title: title,
+      savedMoney: savedMoney,
+      reward: reward,
+      username: username,
+      cnt: cnt,
+    });
+  };
+
   return (
     <Container>
       <HeaderContainer>
@@ -45,9 +55,7 @@ function ChallengeCard({
       <ButtonContainer>
         <SVButton
           buttonText="챌린지 상세보기"
-          onClickButton={() => {
-            onClickDetailButton(1);
-          }}
+          onClickButton={onClickDetail}
           color={"#E3E3E3"}
         />
       </ButtonContainer>

@@ -19,8 +19,8 @@ function App() {
           <Route path="savable_shop" element={<SavableShopPage />} />
           <Route path="ranking" element={<RankingPage />} />
           <Route path="challenge" element={<ChallengePage />} />
-          <Route path="challenge/detail" element={<ChallengeDetailPage />} />
         </Route>
+        <Route path="/challenge/detail" element={<ChallengeDetailPage />} />
       </Routes>
     </Router>
   );
