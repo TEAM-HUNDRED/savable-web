@@ -6,6 +6,7 @@ import ChallengePage from "pages/ChallengePage";
 import ChallengeDetailPage from "pages/ChallengeDetailPage";
 import RankingPage from "pages/RankingPage";
 import SavableShopPage from "pages/SavableShopPage";
+import SavableShopOrderPage from "pages/SavableShopOrderPage";
 
 import LayoutContainer from "container/LayoutContainer";
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="challenge" element={<ChallengePage />} />
         </Route>
         <Route path="/challenge/detail" element={<ChallengeDetailPage />} />
+        <Route path="/savable_shop/order" element={<SavableShopOrderPage />} />
       </Routes>
     </Router>
   );

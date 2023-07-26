@@ -8,7 +8,7 @@ import SavableShopHeader from "components/SavableShopHeader";
 import GiftCardContainer from "container/GiftCardContainer";
 
 const kakaoId =
-  "ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50";
+  "4d82be285a8b342f32bfcdf0af2d52d0f8a5ea726b128403e972865097f23c2c48";
 
 function SavableShopPage() {
   const [userData, setUserData] = useState<MemberPropsType>();
@@ -50,6 +50,7 @@ function SavableShopPage() {
               key={`${item}-${idx}`}
               priceRange={Number(item)}
               giftCardList={giftIconList[item]}
+              userReward={userData.reward}
             />
           );
         })}

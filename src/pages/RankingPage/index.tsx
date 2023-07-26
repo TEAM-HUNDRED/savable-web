@@ -8,7 +8,7 @@ import RankingBar from "components/RankingBar";
 import { RankingPropsType, UserRankingPropsType } from "types/view";
 
 const kakaoId =
-  "ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50";
+  "4d82be285a8b342f32bfcdf0af2d52d0f8a5ea726b128403e972865097f23c2c48";
 
 function RankingPage() {
   const [userRankInfo, setUserRankInfo] = useState<UserRankingPropsType>();
