@@ -1,27 +1,11 @@
-import { useNavigate } from "react-router-dom";
-
 import styled from "styled-components";
 import { GiftCardPropsType } from "types/view";
 
 type PropsType = GiftCardPropsType & {
-  kakaoId: string;
-  userReward: number;
+  onClickPurchase: () => void;
 };
 
-function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
-  const navigate = useNavigate();
-  const onClickPurchaseButton = () => {
-    navigate("/savable_shop/order", {
-      state: {
-        kakaoId: kakaoId,
-        giftcardId: id,
-        gifticonName: name,
-        price: price,
-        userReward: userReward,
-      },
-    });
-  };
-
+function GiftCard({ id, name, price, image, onClickPurchase }: PropsType) {
   return (
     <Container>
       <GiftImage src={image} />
@@ -30,10 +14,7 @@ function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
           <GiftNameText>{name}</GiftNameText>
           <GiftPriceText>{`${price.toLocaleString()}원`}</GiftPriceText>
         </TextContainer>
-        <PurchaseButton
-          onClick={onClickPurchaseButton}
-          canPurchase={userReward >= price}
-        >
+        <PurchaseButton onClick={onClickPurchase}>
           <ButtonText>{`구매하기`}</ButtonText>
         </PurchaseButton>
       </ContentContainer>
@@ -76,6 +57,9 @@ const GiftNameText = styled.p`
   margin: 0px;
   font-size: 6px;
   font-weight: 700;
+  //   white-space: nowrap;
+  //   overflow: hidden;
+  //   text-overflow: ellipsis;
 `;
 
 const GiftPriceText = styled.p`
@@ -85,12 +69,12 @@ const GiftPriceText = styled.p`
   color: #757575;
 `;
 
-const PurchaseButton = styled.button<{ canPurchase: boolean }>`
+const PurchaseButton = styled.button`
   width: 100%;
   height: 14px;
   justify-content: center;
   align-text: center;
-  background-color: ${(props) => (props.canPurchase ? "#e9f9ac" : "#E3E3E3")};
+  background-color: #e9f9ac;
   border: none;
   border-radius: 8px;
   margin-top: 8px;

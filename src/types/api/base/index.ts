@@ -78,10 +78,10 @@ export type Member = {
   kakaoId: string;
   savedMoney: number;
   reward: number;
-  participationList: ParticipatedChallenge[];
+  participationList: ParticipationList[];
 };
 
-export type ParticipatedChallenge = {
+export type ParticipationList = {
   challengeId: number;
   certificationCnt: number;
   startDate: string;

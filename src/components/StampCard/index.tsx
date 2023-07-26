@@ -2,14 +2,13 @@ import { Icons } from "assets/icons";
 import styled from "styled-components";
 
 type PropsType = {
-  savedMoney: number;
+  savedMoney: string;
   color: string;
 };
 
 function StampCard({ savedMoney, color }: PropsType) {
   const CoinIcons = Icons.SvgElement.coinIcon;
-  const contentText = `${savedMoney.toLocaleString()}원\n 절약 성공!`;
-
+  const contentText = `${savedMoney}\n 절약 성공!`;
   return (
     <Container>
       <CoinIcons fill={color} />

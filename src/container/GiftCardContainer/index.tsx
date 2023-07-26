@@ -3,18 +3,11 @@ import styled from "styled-components";
 import { GiftCardPropsType } from "types/view";
 
 type PropsType = {
-  kakaoId: string;
   priceRange: number;
-  userReward: number;
   giftCardList: GiftCardPropsType[];
 };
 
-function GiftCardContainer({
-  priceRange,
-  giftCardList,
-  userReward,
-  kakaoId,
-}: PropsType) {
+function GiftCardContainer({ priceRange, giftCardList }: PropsType) {
   return (
     <Container>
       <PriceRangeText>{`${priceRange.toLocaleString()}원 대`}</PriceRangeText>
@@ -22,13 +15,11 @@ function GiftCardContainer({
         {giftCardList.map((item, idx) => {
           return (
             <GiftCard
-              key={`${item.id} - ${idx}`}
               id={item.id}
               name={item.name}
               price={item.price}
               image={item.image}
-              kakaoId={kakaoId}
-              userReward={userReward}
+              onClickPurchase={() => {}}
             />
           );
         })}
