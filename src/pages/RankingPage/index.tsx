@@ -1,48 +1,51 @@
+import { useEffect, useState } from "react";
 import styled from "styled-components";
+
+import Api from "lib/api/Api";
 
 import RankingHeader from "components/RankingHeader";
 import RankingBar from "components/RankingBar";
+import { RankingPropsType, UserRankingPropsType } from "types/view";
+
+const kakaoId =
+  "4d82be285a8b342f32bfcdf0af2d52d0f8a5ea726b128403e972865097f23c2c48";
 
 function RankingPage() {
-  const userName = "고영준";
+  const [userRankInfo, setUserRankInfo] = useState<UserRankingPropsType>();
+  const [rankingList, setRankingList] = useState<RankingPropsType[]>();
 
-  const dummyRankList = [
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "고영준" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-    { userName: "asdf" },
-  ];
+  const getRankingData = async () => {
+    try {
+      const response = await Api.shared.getRankingList(kakaoId);
+
+      setUserRankInfo(response.data.privateRankingInfo);
+      setRankingList(response.data.rankingListInfo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    getRankingData();
+  }, []);
+
+  if (!userRankInfo || !rankingList) return <></>;
 
   return (
     <Container>
-      <TitleText>{`세이버 ${userName}의 이번 주 랭킹`}</TitleText>
-      <RankingHeader />
+      <RankingHeader {...userRankInfo} />
       <Divider />
-      {dummyRankList.map((item, idx) => {
-        return (
-          <RankingBar
-            userName={item.userName}
-            rank={idx + 1}
-            highlighted={item.userName === userName}
-          />
-        );
-      })}
+      <RankingContainer>
+        {rankingList.map((item, idx) => {
+          return (
+            <RankingBar
+              userName={item.username}
+              rank={item.certRank}
+              highlighted={item.username === userRankInfo.username}
+            />
+          );
+        })}
+      </RankingContainer>
     </Container>
   );
 }
@@ -52,17 +55,17 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const TitleText = styled.p`
-  margin: 0px;
-  font-size: 16px;
-  font-weight: 700;
-`;
-
 const Divider = styled.div`
   width: 100%;
   height: 2px;
   background-color: #e3e3e3;
   margin-bottom: 16px;
+`;
+
+const RankingContainer = styled.div`
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0px 24px;
 `;
 
 export default RankingPage;
