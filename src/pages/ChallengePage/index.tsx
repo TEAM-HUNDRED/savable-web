@@ -19,8 +19,8 @@ function ChallengePage() {
 
   const navigate = useNavigate();
 
-  const onClickDetailButton = (challengeId: number) => {
-    navigate("/challenge/detail", { state: { challengeId: challengeId } });
+  const onClickDetailButton = (props: UserChallengePropsType) => {
+    navigate("/challenge/detail", { state: { props: props } });
   };
 
   const getRankingData = async () => {
