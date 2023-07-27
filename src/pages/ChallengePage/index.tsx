@@ -9,9 +9,12 @@ import AddChallengeButton from "components/AddChallengeButton";
 import ChallengeCard from "components/ChallengeCard";
 import { Icons } from "assets/icons";
 import { KakaoIdContext } from "lib/context/KakaoIdContext";
+import { CHATBOT_LINK_LIST } from "config";
 
 function ChallengePage() {
   const location = useLocation();
+  const navigate = useNavigate();
+
   const paramKakaoId = new URLSearchParams(location.search).get(
     "kakaoId"
   ) as string;
@@ -24,7 +27,13 @@ function ChallengePage() {
     useState<UserChallengePropsType[]>();
   const [userInfo, setUserInfo] = useState<MemberInfoPropsType>();
 
-  const navigate = useNavigate();
+  const onClickCertificationButton = () => {
+    window.open(CHATBOT_LINK_LIST.chat);
+  };
+
+  const onCLickAddButton = () => {
+    window.open(CHATBOT_LINK_LIST.channel);
+  };
 
   const onClickDetailButton = (props: UserChallengePropsType) => {
     navigate("/challenge/detail", { state: { props: props } });
@@ -75,12 +84,12 @@ function ChallengePage() {
           <ChallengeCard
             {...item}
             onClickDetailButton={onClickDetailButton}
-            onClickCertificationButton={() => {}}
+            onClickCertificationButton={onClickCertificationButton}
           />
         );
       })}
       <AddButtonContainer>
-        <AddChallengeButton onClickButton={() => {}} />
+        <AddChallengeButton onClickButton={onCLickAddButton} />
       </AddButtonContainer>
     </Container>
   );
