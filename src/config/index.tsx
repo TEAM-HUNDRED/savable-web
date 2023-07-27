@@ -27,3 +27,13 @@ export const HEADER_CONFIG: HeaderConfigType = {
   "/ranking": { name: "랭킹 현황" },
   "/challenge": { name: "챌린지 현황" },
 };
+
+type ChatBotLinkType = {
+  chat: string;
+  channel: string;
+};
+
+export const CHATBOT_LINK_LIST: ChatBotLinkType = {
+  chat: "http://pf.kakao.com/_gJuyxj/chat",
+  channel: "http://pf.kakao.com/_gJuyxj",
+};
