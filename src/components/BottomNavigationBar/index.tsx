@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { BOTTOM_NAVIGATOR_CONFIG } from "config";
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
 
 function BottomNavigationBar() {
   const location = useLocation();
+  const { kakaoId: currentKakaoId } = useContext(KakaoIdContext);
 
   const basicPath = "/" + location.pathname.split("/")[1];
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -26,7 +28,7 @@ function BottomNavigationBar() {
           const color = currentIndex === idx ? "#9BBE0F" : `black`;
 
           return (
-            <NavigationButton to={item.url}>
+            <NavigationButton to={`${item.url}?kakaoId=${currentKakaoId}`}>
               <item.IconElement width={24} height={24} fill={color} />
               <ButtonIndexText style={{ color: color }}>
                 {item.name}
