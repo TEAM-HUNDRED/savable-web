@@ -27,7 +27,7 @@ const ToastProvider = ({ children }: { children: ReactNode }) => {
     if (toastVisible)
       setTimeout(() => {
         setToastVisible(false);
-      }, 500);
+      }, 1000);
   }, [toastVisible]);
 
   return (

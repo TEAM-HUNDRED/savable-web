@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Api from "lib/api/Api";
@@ -6,11 +6,19 @@ import Api from "lib/api/Api";
 import RankingHeader from "components/RankingHeader";
 import RankingBar from "components/RankingBar";
 import { RankingPropsType, UserRankingPropsType } from "types/view";
-
-const kakaoId =
-  "4d82be285a8b342f32bfcdf0af2d52d0f8a5ea726b128403e972865097f23c2c48";
+import { useLocation } from "react-router-dom";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
 
 function RankingPage() {
+  const location = useLocation();
+  const paramKakaoId = new URLSearchParams(location.search).get(
+    "kakaoId"
+  ) as string;
+
+  const { updateKakaoId, kakaoId: currentKakaoId } = useContext(KakaoIdContext);
+
+  const kakaoId = paramKakaoId ?? currentKakaoId;
+
   const [userRankInfo, setUserRankInfo] = useState<UserRankingPropsType>();
   const [rankingList, setRankingList] = useState<RankingPropsType[]>();
 
@@ -26,6 +34,8 @@ function RankingPage() {
   };
 
   useEffect(() => {
+    if (!currentKakaoId) updateKakaoId(paramKakaoId);
+
     getRankingData();
   }, []);
 

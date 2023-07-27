@@ -91,6 +91,7 @@ function SavableShopOrderPage() {
     if (verifyCanSubmit) {
       navigateToShop();
       handleSubmit();
+      showToast({ description: "주문이 완료되었어요:D", toastVisible: true });
     } else {
       showToast({ description: "입력값을 확인하세요!", toastVisible: true });
     }
