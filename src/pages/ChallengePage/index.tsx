@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 import Api from "lib/api/Api";
 import { MemberInfoPropsType, UserChallengePropsType } from "types/view";
@@ -8,11 +8,18 @@ import { MemberInfoPropsType, UserChallengePropsType } from "types/view";
 import AddChallengeButton from "components/AddChallengeButton";
 import ChallengeCard from "components/ChallengeCard";
 import { Icons } from "assets/icons";
-
-const kakaoId =
-  "4d82be285a8b342f32bfcdf0af2d52d0f8a5ea726b128403e972865097f23c2c48";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
 
 function ChallengePage() {
+  const location = useLocation();
+  const paramKakaoId = new URLSearchParams(location.search).get(
+    "kakaoId"
+  ) as string;
+
+  const { updateKakaoId, kakaoId: currentKakaoId } = useContext(KakaoIdContext);
+
+  const kakaoId = paramKakaoId ?? currentKakaoId;
+
   const [userChallenge, setUserChallenge] =
     useState<UserChallengePropsType[]>();
   const [userInfo, setUserInfo] = useState<MemberInfoPropsType>();
@@ -44,6 +51,8 @@ function ChallengePage() {
   };
 
   useEffect(() => {
+    if (!currentKakaoId) updateKakaoId(paramKakaoId);
+
     getRankingData();
     getUserInfo();
   }, []);

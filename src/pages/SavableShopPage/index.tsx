@@ -1,16 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import Api from "lib/api/Api";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
 import { GiftCardPropsType, MemberPropsType } from "types/view";
 
 import SavableShopHeader from "components/SavableShopHeader";
 import GiftCardContainer from "container/GiftCardContainer";
 
-const kakaoId =
-  "4d82be285a8b342f32bfcdf0af2d52d0f8a5ea726b128403e972865097f23c2c48";
-
 function SavableShopPage() {
+  const location = useLocation();
+  const paramKakaoId = new URLSearchParams(location.search).get(
+    "kakaoId"
+  ) as string;
+
+  const { updateKakaoId, kakaoId: currentKakaoId } = useContext(KakaoIdContext);
+
+  const kakaoId = paramKakaoId ?? currentKakaoId;
+
   const [userData, setUserData] = useState<MemberPropsType>();
   const [giftIconList, setGiftIconList] = useState<{
     [key: string]: GiftCardPropsType[];
@@ -30,6 +38,8 @@ function SavableShopPage() {
   };
 
   useEffect(() => {
+    if (!currentKakaoId) updateKakaoId(paramKakaoId);
+
     getGiftCardList();
   }, []);
 
