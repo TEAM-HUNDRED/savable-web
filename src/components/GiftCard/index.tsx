@@ -1,5 +1,7 @@
+import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 
+import { ToastContext } from "lib/context/ToastContext";
 import styled from "styled-components";
 import { GiftCardPropsType } from "types/view";
 
@@ -9,8 +11,12 @@ type PropsType = GiftCardPropsType & {
 };
 
 function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
+  const canPurchase = userReward >= price;
   const navigate = useNavigate();
-  const onClickPurchaseButton = () => {
+
+  const { showToast } = useContext(ToastContext);
+
+  const navigateToCreateOrder = () => {
     navigate("/savable_shop/order", {
       state: {
         kakaoId: kakaoId,
@@ -22,6 +28,14 @@ function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
     });
   };
 
+  const blockPurchase = () => {
+    showToast({ description: "금액을 확인해주세요", toastVisible: true });
+  };
+
+  const handlePurchaseButton = canPurchase
+    ? navigateToCreateOrder
+    : blockPurchase;
+
   return (
     <Container>
       <GiftImage src={image} />
@@ -31,8 +45,8 @@ function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
           <GiftPriceText>{`${price.toLocaleString()}원`}</GiftPriceText>
         </TextContainer>
         <PurchaseButton
-          onClick={onClickPurchaseButton}
-          canPurchase={userReward >= price}
+          onClick={handlePurchaseButton}
+          canPurchase={canPurchase}
         >
           <ButtonText>{`구매하기`}</ButtonText>
         </PurchaseButton>
@@ -100,6 +114,7 @@ const ButtonText = styled.p`
   margin: 0px;
   font-size: 6px;
   font-weight: 700;
+  color: black;
 `;
 
 export default GiftCard;

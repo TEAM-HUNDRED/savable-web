@@ -31,7 +31,7 @@ const Toast = styled.div`
   height: 30px;
   padding: 8px 16px;
   background-color: #e3e3e3;
-  border-radius: 15px;
+  border-radius: 30px;
 `;
 
 const ToastText = styled.p`
