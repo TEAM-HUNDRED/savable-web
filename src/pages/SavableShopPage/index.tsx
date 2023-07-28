@@ -40,8 +40,10 @@ function SavableShopPage() {
   useEffect(() => {
     if (!currentKakaoId) updateKakaoId(paramKakaoId);
 
-    getGiftCardList();
-  }, []);
+    setTimeout(() => {
+      getGiftCardList();
+    }, 1000);
+  }, [location]);
 
   if (!userData || !giftIconList) return <></>;
 

@@ -84,7 +84,7 @@ function SavableShopOrderPage() {
     userReward >= price * quantity;
 
   const navigateToShop = () => {
-    navigate("/savable_shop", { state: { kakaoId: kakaoId } });
+    navigate("/savable_shop", { replace: true, state: { kakaoId: kakaoId } });
   };
 
   const onClickSubmitButton = () => {
