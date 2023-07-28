@@ -32,12 +32,13 @@ function SavableShopOrderPage() {
     limitLength: 24,
     limitRow: 1,
     value: quantity,
-    onChangeValue: (value: string) => {
+    onChangeValue: (e: ChangeEvent<HTMLInputElement>) => {
       const regex = /^[0-9]$/;
 
-      if (regex.test(value)) {
-        setQuantity(value);
+      if (regex.test(e.target.value)) {
+        setPhoneNumber(e.target.value);
       }
+      setQuantity(e.target.value);
     },
   };
 
