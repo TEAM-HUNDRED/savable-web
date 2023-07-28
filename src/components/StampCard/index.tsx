@@ -12,7 +12,7 @@ function StampCard({ savedMoney, color }: PropsType) {
 
   return (
     <Container>
-      <CoinIcons fill={color} />
+      <CoinIcons width={28} height={28} fill={color} />
       <ContentText>{contentText}</ContentText>
     </Container>
   );
@@ -33,7 +33,7 @@ const Container = styled.div`
 `;
 
 const ContentText = styled.p`
-  font-size: 6px;
+  font-size: 10px;
   font-weight: 700;
   color: #757575;
   margin: 0px;
