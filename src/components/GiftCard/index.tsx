@@ -88,13 +88,13 @@ const TextContainer = styled.div`
 
 const GiftNameText = styled.p`
   margin: 0px;
-  font-size: 6px;
+  font-size: 10px;
   font-weight: 700;
 `;
 
 const GiftPriceText = styled.p`
   margin: 0px;
-  font-size: 6px;
+  font-size: 10px;
   font-weight: 700;
   color: #757575;
 `;
@@ -112,7 +112,7 @@ const PurchaseButton = styled.button<{ canPurchase: boolean }>`
 
 const ButtonText = styled.p`
   margin: 0px;
-  font-size: 6px;
+  font-size: 10px;
   font-weight: 700;
   color: black;
 `;

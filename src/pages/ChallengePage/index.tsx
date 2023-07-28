@@ -72,7 +72,7 @@ function ChallengePage() {
 
   return (
     <Container>
-      <TitleText>{`세이버 ${userInfo.username}의 참여 챌린지`}</TitleText>
+      <TitleText>{`세이버 ${userInfo.username}님의 참여 챌린지`}</TitleText>
       {userChallenge.length === 0 && (
         <DescriptionContainer>
           <CoinIcon fill="#9bbe0f" width="24" height={"24"} />
