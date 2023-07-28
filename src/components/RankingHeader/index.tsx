@@ -23,7 +23,7 @@ function RankingHeader({
 
   return (
     <Container>
-      <TitleText>{`세이버 ${username}의 이번 주 랭킹`}</TitleText>
+      <TitleText>{`세이버 ${username}님의 이번 주 랭킹`}</TitleText>
       <ContentContainer>
         <MedalContainer>
           <RankingText>{certRank}</RankingText>

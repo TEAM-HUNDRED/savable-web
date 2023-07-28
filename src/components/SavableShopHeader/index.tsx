@@ -9,8 +9,8 @@ type PropsType = {
 };
 
 function SavableShopHeader({ savedMoney, reward, username }: PropsType) {
-  const currentMonth = new Date().getMonth() + 1;
-  const descriptionText = `${currentMonth}월에 ${savedMoney.toLocaleString()}원 절약하고\n${reward.toLocaleString()}원 받았어요!`;
+  // const currentMonth = new Date().getMonth() + 1;
+  const descriptionText = `지금까지 ${savedMoney.toLocaleString()}원 절약하고\n${reward.toLocaleString()}원 받았어요!`;
 
   return (
     <Container>

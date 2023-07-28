@@ -27,7 +27,7 @@ function ChallengeDetailPage() {
     },
   ];
 
-  const titleText = `${title}로 \n ${savedMoney.toLocaleString()} 아끼고 ${reward.toLocaleString()} 벌었어요`;
+  const titleText = `${title}로 \n ${savedMoney.toLocaleString()}원 아끼고 ${reward.toLocaleString()}원 벌었어요`;
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
 
   return (
@@ -56,7 +56,7 @@ function ChallengeDetailPage() {
             );
           })}
         </ChallengeContainer>
-        <StampContainer cnt={cnt} />
+        <StampContainer cnt={cnt} title={title} />
       </ContentContainer>
       <BottomNavigationBar />
     </Container>

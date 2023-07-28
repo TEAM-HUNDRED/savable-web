@@ -129,7 +129,7 @@ function SavableShopOrderPage() {
           );
         })}
         <SubmitButton canSubmit onClick={onClickSubmitButton}>
-          <ButtonText>{"재출하고 구매하기"}</ButtonText>
+          <ButtonText>{"신청하기"}</ButtonText>
         </SubmitButton>
       </ContentContainer>
       <BottomNavigationBar />

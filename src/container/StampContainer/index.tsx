@@ -4,10 +4,11 @@ import StampCard from "components/StampCard";
 
 type PropsType = {
   cnt: number;
+  title: string;
 };
 
-function StampContainer({ cnt }: PropsType) {
-  const contentText = `커피값 절약 챌린지 총 ${cnt}회 인증하셨어요!\n절약해서 스탬프 쾅! 쾅! 받아가요`;
+function StampContainer({ cnt, title }: PropsType) {
+  const contentText = `${title} 총 ${cnt}회 인증하셨어요!\n절약해서 스탬프 쾅! 쾅! 받아가요`;
   const numberOfGold = Math.floor(cnt / 50);
   const numberOfSilver = Math.floor((cnt % 50) / 10);
   const numberOfGreen = cnt % 10;
