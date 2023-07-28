@@ -36,9 +36,8 @@ function SavableShopOrderPage() {
       const regex = /^[0-9]$/;
 
       if (regex.test(e.target.value)) {
-        setPhoneNumber(e.target.value);
+        setQuantity(e.target.value);
       }
-      setQuantity(e.target.value);
     },
   };
 
