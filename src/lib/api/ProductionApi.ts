@@ -13,7 +13,7 @@ export default class ProductionApi implements ISVApi {
 
   load() {
     console.log("[AxiosService] Start axios service");
-    this._axios.defaults.baseURL = process.env.REACT_APP_API_BASE_UR;
+    this._axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL;
     this._axios.defaults.timeout = 4000;
   }
 
