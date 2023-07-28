@@ -19,7 +19,7 @@ function SavableShopOrderPage() {
   const { kakaoId, giftcardId, gifticonName, price, userReward } =
     location.state;
 
-  const [quantity, setQuantity] = useState<number>();
+  const [quantity, setQuantity] = useState<string>();
   const [phoneNumber, setPhoneNumber] = useState<string>("");
   const [positivePoints, setPositivePoints] = useState<string>("");
   const [negativePoints, setNegativePoints] = useState<string>("");
@@ -28,21 +28,32 @@ function SavableShopOrderPage() {
 
   const quantityInput = {
     label: `${gifticonName} (${price.toLocaleString()}원) 구매 수량`,
-    placeholder: "구매할 기프티콘의 수량을 적어주세요",
+    placeholder: "구매할 기프티콘의 수량을 [숫자] 만 적어주세요",
     limitLength: 24,
     limitRow: 1,
     value: quantity,
-    onChangeValue: (e: ChangeEvent<HTMLInputElement>) =>
-      setQuantity(Number(e.target.value)),
+    onChangeValue: (value: string) => {
+      const regex = /^[0-9]$/;
+
+      if (regex.test(value)) {
+        setQuantity(value);
+      }
+    },
   };
 
   const inputCardList = [
     {
       label: "전화번호",
-      placeholder: "전화번호를 작성해주세요",
+      placeholder: "'-'없이 전화번호를 작성해주세요",
       value: phoneNumber,
       limitRow: 1,
-      onChangeValue: (value: string) => setPhoneNumber(value),
+      onChangeValue: (value: string) => {
+        const regex = /^[0-9\b]{0,11}$/;
+
+        if (regex.test(value)) {
+          setPhoneNumber(value);
+        }
+      },
     },
     {
       label: "좋았던 점을 적어주세요!",
@@ -81,7 +92,7 @@ function SavableShopOrderPage() {
     phoneNumber &&
     positivePoints &&
     negativePoints &&
-    userReward >= price * quantity;
+    userReward >= price * Number(quantity);
 
   const navigateToShop = () => {
     navigate("/savable_shop", { replace: true, state: { kakaoId: kakaoId } });
@@ -115,6 +126,7 @@ function SavableShopOrderPage() {
           onChange={quantityInput.onChangeValue}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
+          min={0}
         />
         {inputCardList.map((item, idx) => {
           return (
