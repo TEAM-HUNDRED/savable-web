@@ -1,3 +1,4 @@
+import { Amplitude } from "lib/hooks";
 import React, { useState, ReactNode } from "react";
 
 interface IKakaoIdContext {
@@ -14,6 +15,7 @@ const KakaoIdProvider = ({ children }: { children: ReactNode }) => {
   const [kakaoId, setKakaoId] = useState<string>("");
 
   const updateKakaoId = (id: string) => {
+    Amplitude.initialize(id);
     setKakaoId(id);
   };
 

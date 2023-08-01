@@ -1,15 +1,8 @@
-import { useEffect } from "react";
-import {
-  Route,
-  BrowserRouter as Router,
-  Routes,
-  useLocation,
-} from "react-router-dom";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import Api from "lib/api/Api";
 import ToastProvider from "lib/context/ToastContext";
 import KakaoIdProvider from "lib/context/KakaoIdContext";
-import { Amplitude } from "lib/hooks";
 
 import ChallengePage from "pages/ChallengePage";
 import ChallengeDetailPage from "pages/ChallengeDetailPage";
@@ -22,15 +15,6 @@ import LayoutContainer from "container/LayoutContainer";
 Api.shared.load();
 
 function App() {
-  const location = useLocation();
-  const paramKakaoId = new URLSearchParams(location.search).get(
-    "kakaoId"
-  ) as string;
-
-  useEffect(() => {
-    Amplitude.initialize(paramKakaoId);
-  }, []);
-
   return (
     <KakaoIdProvider>
       <ToastProvider>
