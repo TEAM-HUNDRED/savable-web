@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { BOTTOM_NAVIGATOR_CONFIG } from "config";
 import { KakaoIdContext } from "lib/context/KakaoIdContext";
+import { Amplitude } from "lib/hooks";
 
 function BottomNavigationBar() {
   const location = useLocation();
@@ -12,6 +13,13 @@ function BottomNavigationBar() {
 
   const basicPath = "/" + location.pathname.split("/")[1];
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  const onClickNavigationButton = (buttonName: string) => {
+    Amplitude.logClick({
+      buttonName: buttonName,
+      currentRouteName: basicPath,
+    });
+  };
 
   useEffect(() => {
     BOTTOM_NAVIGATOR_CONFIG.map((item, idx) => {
@@ -28,7 +36,12 @@ function BottomNavigationBar() {
           const color = currentIndex === idx ? "#9BBE0F" : `black`;
 
           return (
-            <NavigationButton to={`${item.url}?kakaoId=${currentKakaoId}`}>
+            <NavigationButton
+              to={`${item.url}?kakaoId=${currentKakaoId}`}
+              onClick={() => {
+                onClickNavigationButton(item.name);
+              }}
+            >
               <item.IconElement width={24} height={24} fill={color} />
               <ButtonIndexText style={{ color: color }}>
                 {item.name}

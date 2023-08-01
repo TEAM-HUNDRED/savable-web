@@ -9,13 +9,13 @@ const initialize = (kakaoId: string) => {
 
 type LogClickPropsType = {
   buttonName: string;
-  routeName: string;
+  currentRouteName: string;
 };
 
-const logClick = ({ buttonName, routeName }: LogClickPropsType) => {
+const logClick = ({ buttonName, currentRouteName }: LogClickPropsType) => {
   amplitude.logEvent("Click", {
     button_name: buttonName,
-    route_name: routeName,
+    current_route_name: currentRouteName,
   });
 };
 
