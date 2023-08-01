@@ -105,8 +105,16 @@ function SavableShopOrderPage() {
     if (verifyCanSubmit) {
       navigateToShop();
       handleSubmit();
+      Amplitude.logClick({
+        buttonName: `finish_order_${giftcardId}`,
+        currentRouteName: "/savable_shop/order",
+      });
       showToast({ description: "주문이 완료되었어요:D", toastVisible: true });
     } else {
+      Amplitude.logClick({
+        buttonName: `retry_order_${giftcardId}`,
+        currentRouteName: "/savable_shop/order",
+      });
       showToast({ description: "입력값을 확인하세요!", toastVisible: true });
     }
   };
