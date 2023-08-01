@@ -1,14 +1,17 @@
-import { ChangeEvent, useContext, useState } from "react";
+import { ChangeEvent, useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
+
+import Api from "lib/api/Api";
+import { ToastContext } from "lib/context/ToastContext";
+import { Amplitude } from "lib/hooks";
+
+import { CreateOrderGiftPayload } from "types/api/base";
 
 import { Icons } from "assets/icons";
 
 import BottomNavigationBar from "components/BottomNavigationBar";
 import CreateOrderInputCard from "components/CreateOrderInputCard";
-import Api from "lib/api/Api";
-import { CreateOrderGiftPayload } from "types/api/base";
-import { ToastContext } from "lib/context/ToastContext";
 
 function SavableShopOrderPage() {
   const navigate = useNavigate();
@@ -102,11 +105,23 @@ function SavableShopOrderPage() {
     if (verifyCanSubmit) {
       navigateToShop();
       handleSubmit();
+      Amplitude.logClick({
+        buttonName: `finish_order_${giftcardId}`,
+        currentRouteName: "/savable_shop/order",
+      });
       showToast({ description: "주문이 완료되었어요:D", toastVisible: true });
     } else {
+      Amplitude.logClick({
+        buttonName: `retry_order_${giftcardId}`,
+        currentRouteName: "/savable_shop/order",
+      });
       showToast({ description: "입력값을 확인하세요!", toastVisible: true });
     }
   };
+
+  useEffect(() => {
+    Amplitude.logView("savable_shop_order");
+  }, []);
 
   return (
     <Container>

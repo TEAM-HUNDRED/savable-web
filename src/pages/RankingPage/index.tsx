@@ -1,13 +1,15 @@
+import { useLocation } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Api from "lib/api/Api";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
+import { Amplitude } from "lib/hooks";
+
+import { RankingPropsType, UserRankingPropsType } from "types/view";
 
 import RankingHeader from "components/RankingHeader";
 import RankingBar from "components/RankingBar";
-import { RankingPropsType, UserRankingPropsType } from "types/view";
-import { useLocation } from "react-router-dom";
-import { KakaoIdContext } from "lib/context/KakaoIdContext";
 
 function RankingPage() {
   const location = useLocation();
@@ -36,6 +38,7 @@ function RankingPage() {
   useEffect(() => {
     if (!currentKakaoId) updateKakaoId(paramKakaoId);
 
+    Amplitude.logView("ranking");
     getRankingData();
   }, []);
 

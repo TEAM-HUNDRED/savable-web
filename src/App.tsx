@@ -1,6 +1,8 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 import Api from "lib/api/Api";
+import ToastProvider from "lib/context/ToastContext";
+import KakaoIdProvider from "lib/context/KakaoIdContext";
 
 import ChallengePage from "pages/ChallengePage";
 import ChallengeDetailPage from "pages/ChallengeDetailPage";
@@ -9,8 +11,6 @@ import SavableShopPage from "pages/SavableShopPage";
 import SavableShopOrderPage from "pages/SavableShopOrderPage";
 
 import LayoutContainer from "container/LayoutContainer";
-import ToastProvider from "lib/context/ToastContext";
-import KakaoIdProvider from "lib/context/KakaoIdContext";
 
 Api.shared.load();
 

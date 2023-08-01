@@ -1,12 +1,14 @@
+import { useEffect } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styled from "styled-components";
 
+import { Amplitude } from "lib/hooks";
 import { UserChallengePropsType } from "types/view";
 import { Icons } from "assets/icons";
+import { Images } from "assets/images";
 
 import StampContainer from "container/StampContainer";
 import BottomNavigationBar from "components/BottomNavigationBar";
-import { Images } from "assets/images";
 
 function ChallengeDetailPage() {
   const location = useLocation();
@@ -29,6 +31,10 @@ function ChallengeDetailPage() {
 
   const titleText = `${title}로 \n ${savedMoney.toLocaleString()}원 아끼고 ${reward.toLocaleString()}원 벌었어요`;
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
+
+  useEffect(() => {
+    Amplitude.logView(`challenge_detail_${title}`);
+  }, []);
 
   return (
     <Container>
@@ -86,6 +92,7 @@ const HeaderContainer = styled.div`
   border-bottom: 1px solid #e8e8e8;
   background-color: #fff;
   box-sizing: border-box;
+  max-width: 768px;
 `;
 
 const IconContainer = styled(Link)`
@@ -107,6 +114,7 @@ const ContentContainer = styled.div`
   width: 100%;
   padding: 28px 24px;
   box-sizing: border-box;
+  max-width: 768px;
 `;
 
 const ChallengeContainer = styled.div`
