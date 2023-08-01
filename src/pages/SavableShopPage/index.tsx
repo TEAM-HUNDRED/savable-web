@@ -4,6 +4,8 @@ import styled from "styled-components";
 
 import Api from "lib/api/Api";
 import { KakaoIdContext } from "lib/context/KakaoIdContext";
+import { Amplitude } from "lib/hooks";
+
 import { GiftCardPropsType, MemberPropsType } from "types/view";
 
 import SavableShopHeader from "components/SavableShopHeader";
@@ -39,6 +41,8 @@ function SavableShopPage() {
 
   useEffect(() => {
     if (!currentKakaoId) updateKakaoId(paramKakaoId);
+
+    Amplitude.logView("savable_shop");
 
     setTimeout(() => {
       getGiftCardList();

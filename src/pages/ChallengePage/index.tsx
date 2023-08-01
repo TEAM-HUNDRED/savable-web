@@ -3,13 +3,15 @@ import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 
 import Api from "lib/api/Api";
+import { Amplitude } from "lib/hooks";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
+
 import { MemberInfoPropsType, UserChallengePropsType } from "types/view";
+import { Icons } from "assets/icons";
+import { CHATBOT_LINK_LIST } from "config";
 
 import AddChallengeButton from "components/AddChallengeButton";
 import ChallengeCard from "components/ChallengeCard";
-import { Icons } from "assets/icons";
-import { KakaoIdContext } from "lib/context/KakaoIdContext";
-import { CHATBOT_LINK_LIST } from "config";
 
 function ChallengePage() {
   const location = useLocation();
@@ -62,6 +64,7 @@ function ChallengePage() {
   useEffect(() => {
     if (!currentKakaoId) updateKakaoId(paramKakaoId);
 
+    Amplitude.logView("challenge");
     getRankingData();
     getUserInfo();
   }, []);
