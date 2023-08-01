@@ -92,6 +92,7 @@ const HeaderContainer = styled.div`
   border-bottom: 1px solid #e8e8e8;
   background-color: #fff;
   box-sizing: border-box;
+  max-width: 768px;
 `;
 
 const IconContainer = styled(Link)`
@@ -113,6 +114,7 @@ const ContentContainer = styled.div`
   width: 100%;
   padding: 28px 24px;
   box-sizing: border-box;
+  max-width: 768px;
 `;
 
 const ChallengeContainer = styled.div`

@@ -29,15 +29,27 @@ function ChallengePage() {
     useState<UserChallengePropsType[]>();
   const [userInfo, setUserInfo] = useState<MemberInfoPropsType>();
 
-  const onClickCertificationButton = () => {
+  const onClickCertificationButton = (title: string) => {
+    Amplitude.logClick({
+      buttonName: `cert_challenge_${title}`,
+      currentRouteName: "/challenge",
+    });
     window.open(CHATBOT_LINK_LIST.chat);
   };
 
   const onCLickAddButton = () => {
+    Amplitude.logClick({
+      buttonName: `add_challenge`,
+      currentRouteName: "/challenge",
+    });
     window.open(CHATBOT_LINK_LIST.channel);
   };
 
   const onClickDetailButton = (props: UserChallengePropsType) => {
+    Amplitude.logClick({
+      buttonName: `show_detail_${props.title}`,
+      currentRouteName: "/challenge",
+    });
     navigate("/challenge/detail", { state: { props: props } });
   };
 
@@ -87,7 +99,9 @@ function ChallengePage() {
           <ChallengeCard
             {...item}
             onClickDetailButton={onClickDetailButton}
-            onClickCertificationButton={onClickCertificationButton}
+            onClickCertificationButton={() => {
+              onClickCertificationButton(item.title);
+            }}
           />
         );
       })}
