@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { ToastContext } from "lib/context/ToastContext";
 import styled from "styled-components";
 import { GiftCardPropsType } from "types/view";
+import { Amplitude } from "lib/hooks";
 
 type PropsType = GiftCardPropsType & {
   kakaoId: string;
@@ -17,6 +18,10 @@ function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
   const { showToast } = useContext(ToastContext);
 
   const navigateToCreateOrder = () => {
+    Amplitude.logClick({
+      buttonName: `try_purchase_${id}`,
+      currentRouteName: "/savable_shop",
+    });
     navigate("/savable_shop/order", {
       state: {
         kakaoId: kakaoId,
@@ -29,6 +34,10 @@ function GiftCard({ id, name, price, image, kakaoId, userReward }: PropsType) {
   };
 
   const blockPurchase = () => {
+    Amplitude.logClick({
+      buttonName: `can't_purchase_${id}`,
+      currentRouteName: "/savable_shop",
+    });
     showToast({ description: "금액을 확인해주세요", toastVisible: true });
   };
 
