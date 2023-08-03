@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
@@ -27,7 +27,7 @@ function SavableShopPage() {
   }>();
   const [giftPriceRageArray, setPriceRangeArray] = useState<string[]>([]);
 
-  const getGiftCardList = async () => {
+  const getGiftCardList = useCallback(async () => {
     try {
       const response = await Api.shared.getGifticonList(kakaoId);
 
@@ -37,7 +37,7 @@ function SavableShopPage() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [kakaoId]);
 
   useEffect(() => {
     if (!currentKakaoId) updateKakaoId(paramKakaoId);
@@ -47,7 +47,7 @@ function SavableShopPage() {
     setTimeout(() => {
       getGiftCardList();
     }, 1000);
-  }, [location]);
+  }, [location, currentKakaoId, paramKakaoId, updateKakaoId, getGiftCardList]);
 
   if (!userData || !giftIconList) return <></>;
 

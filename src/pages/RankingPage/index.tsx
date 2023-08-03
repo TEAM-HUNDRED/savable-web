@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
 import Api from "lib/api/Api";
@@ -24,7 +24,7 @@ function RankingPage() {
   const [userRankInfo, setUserRankInfo] = useState<UserRankingPropsType>();
   const [rankingList, setRankingList] = useState<RankingPropsType[]>();
 
-  const getRankingData = async () => {
+  const getRankingData = useCallback(async () => {
     try {
       const response = await Api.shared.getRankingList(kakaoId);
 
@@ -33,14 +33,14 @@ function RankingPage() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [kakaoId]);
 
   useEffect(() => {
     if (!currentKakaoId) updateKakaoId(paramKakaoId);
 
     Amplitude.logView("ranking");
     getRankingData();
-  }, []);
+  }, [currentKakaoId, paramKakaoId, getRankingData, updateKakaoId]);
 
   if (!userRankInfo || !rankingList) return <></>;
 

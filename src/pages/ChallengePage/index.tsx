@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { useLocation, useNavigate } from "react-router-dom";
 
@@ -53,7 +53,7 @@ function ChallengePage() {
     navigate("/challenge/detail", { state: { props: props } });
   };
 
-  const getRankingData = async () => {
+  const getRankingData = useCallback(async () => {
     try {
       const response = await Api.shared.getUserChallenge(kakaoId);
 
@@ -61,9 +61,9 @@ function ChallengePage() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [kakaoId]);
 
-  const getUserInfo = async () => {
+  const getUserInfo = useCallback(async () => {
     try {
       const response = await Api.shared.getUserSavingStatus(kakaoId);
 
@@ -71,7 +71,7 @@ function ChallengePage() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [kakaoId]);
 
   useEffect(() => {
     if (!currentKakaoId) updateKakaoId(paramKakaoId);
@@ -79,7 +79,13 @@ function ChallengePage() {
     Amplitude.logView("challenge");
     getRankingData();
     getUserInfo();
-  }, []);
+  }, [
+    currentKakaoId,
+    paramKakaoId,
+    getRankingData,
+    getUserInfo,
+    updateKakaoId,
+  ]);
 
   if (!userChallenge || !userInfo) return <></>;
 

@@ -34,7 +34,7 @@ function ChallengeDetailPage() {
 
   useEffect(() => {
     Amplitude.logView(`challenge_detail_${title}`);
-  }, []);
+  }, [title]);
 
   return (
     <Container>

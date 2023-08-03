@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useCallback, useState } from "react";
+import React, { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 
 type PropsType = {
@@ -25,11 +25,11 @@ function CreateOrderInputCard({
   const inputBarHeight =
     valueRowHeight > baseRowHeight ? valueRowHeight : baseRowHeight;
 
-  const onChange = useCallback((e: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     if (limitRow && e.target.value.split(`\n`).length > limitRow)
       onChangeValue(e.target.value.slice(0, -1));
     else onChangeValue(e.target.value);
-  }, []);
+  };
 
   return (
     <Container>
