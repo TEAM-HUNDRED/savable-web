@@ -85,6 +85,7 @@ const Divider = styled.div`
   width: 100%;
   background-color: #cfcfcf;
   margin: 4px 0px;
+  margin-top: 16px;
 `;
 
 const GiftContainer = styled.div`
