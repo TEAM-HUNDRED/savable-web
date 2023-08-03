@@ -13,7 +13,7 @@ import BottomNavigationBar from "components/BottomNavigationBar";
 function ChallengeDetailPage() {
   const location = useLocation();
 
-  const { title, savedMoney, reward, username, cnt }: UserChallengePropsType =
+  const { title, savedMoney, reward, cnt }: UserChallengePropsType =
     location.state.props;
 
   const challengeStatus = [
