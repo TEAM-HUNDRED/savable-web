@@ -1,5 +1,6 @@
 import { Icons } from "assets/icons";
 import { Images } from "assets/images";
+import SBBar from "components/common/SBBar";
 import styled from "styled-components";
 
 type PropsType = {
@@ -22,6 +23,11 @@ function SavableShopHeader({ savedMoney, reward, username }: PropsType) {
           <SavedMoneyText>{`${reward.toLocaleString()}원`}</SavedMoneyText>
         </ContentContainer>
       </SavedMoneyContainer>
+      <SBBar
+        title={"기프티콘 주문 현황 보러 가기"}
+        onClickBar={() => {}}
+        icon={Icons.SvgElement.giftIcon}
+      />
       <DescriptionContainer>
         <CoinIcon fill="#9bbe0f" width="24" height={"24"} />
         <DescriptionText>{descriptionText}</DescriptionText>
