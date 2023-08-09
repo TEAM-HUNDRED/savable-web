@@ -25,7 +25,7 @@ function SavableShopHeader({ savedMoney, reward, username }: PropsType) {
       </SavedMoneyContainer>
       <SBBar
         title={"기프티콘 주문 현황 보러 가기"}
-        onClickBar={() => {}}
+        pathName={"/savable_shop/order_history"}
         icon={Icons.SvgElement.giftIcon}
       />
       <DescriptionContainer>

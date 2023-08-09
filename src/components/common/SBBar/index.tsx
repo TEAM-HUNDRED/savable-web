@@ -1,16 +1,17 @@
 import { Icons } from "assets/icons";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 type PropsType = {
   title: string;
   icon: React.FunctionComponent;
-  onClickBar: () => void;
+  pathName: string;
 };
 
-function SBBar({ title, icon, onClickBar }: PropsType) {
+function SBBar({ title, icon, pathName }: PropsType) {
   const BarIcon = icon;
   return (
-    <Container onClick={onClickBar}>
+    <Container to={pathName}>
       <TitleContainer>
         <BarIcon />
         <TitleText>{title}</TitleText>
@@ -20,7 +21,7 @@ function SBBar({ title, icon, onClickBar }: PropsType) {
   );
 }
 
-const Container = styled.button`
+const Container = styled(Link)`
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -31,6 +32,8 @@ const Container = styled.button`
   background-color: #fff;
   border: 1px solid #e8e8e8;
   border-radius: 8px;
+  box-sizing: border-box;
+  text-decoration: none;
 `;
 
 const TitleContainer = styled.div`
@@ -44,6 +47,7 @@ const TitleText = styled.p`
   margin: 0px;
   margin-left: 8px;
   font-size: 12px;
+  color: black;
 `;
 
 const RightArrowIcon = styled(Icons.SvgElement.rightArrowIcon)``;

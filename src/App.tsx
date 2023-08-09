@@ -11,6 +11,7 @@ import SavableShopPage from "pages/SavableShopPage";
 import SavableShopOrderPage from "pages/SavableShopOrderPage";
 
 import LayoutContainer from "container/LayoutContainer";
+import OrderHistoryPage from "pages/OrderHistoryPage";
 
 Api.shared.load();
 
@@ -29,6 +30,10 @@ function App() {
             <Route
               path="/savable_shop/order"
               element={<SavableShopOrderPage />}
+            />
+            <Route
+              path="/savable_shop/order_history"
+              element={<OrderHistoryPage />}
             />
           </Routes>
         </Router>
