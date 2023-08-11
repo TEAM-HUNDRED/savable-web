@@ -6,6 +6,7 @@ import { ReactComponent as CoinIcon } from "./ic_coin.svg";
 import { ReactComponent as GiftIcon } from "./ic_gift.svg";
 import { ReactComponent as LeftArrowIcon } from "./ic_left_arrow.svg";
 import { ReactComponent as WarningIcon } from "./ic_warning.svg";
+import { ReactComponent as RightArrowIcon } from "./ic_right_arrow.svg";
 
 export const Icons = {
   SvgElement: {
@@ -17,5 +18,6 @@ export const Icons = {
     giftIcon: GiftIcon,
     leftArrowIcon: LeftArrowIcon,
     warningIcon: WarningIcon,
+    rightArrowIcon: RightArrowIcon,
   },
 };
