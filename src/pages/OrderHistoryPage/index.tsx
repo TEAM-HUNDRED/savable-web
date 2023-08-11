@@ -1,4 +1,5 @@
 import { Icons } from "assets/icons";
+import OrderStatusCard from "components/OrderStatusCard";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
@@ -6,6 +7,18 @@ function OrderHistoryPage() {
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
 
   const warningText = `기프티콘 신청 현황이 "발송 준비"가 되면\n기프티콘 전송이 1일 이내 완료됩니다.`;
+
+  const DummyOrderItem = [
+    {
+      title: "아이템 명",
+      imageUrl:
+        "https://chatbot-budket.s3.ap-northeast-2.amazonaws.com/giftcard/giftcard-3.png",
+      status: "승인 대기",
+      date: "일자",
+      amountOfGift: 2,
+      totalPrice: 2000,
+    },
+  ];
 
   return (
     <Container>
@@ -21,6 +34,9 @@ function OrderHistoryPage() {
           <WarningIcon fill="#ffaea5" width="24" height={"24"} />
           <DescriptionText>{warningText}</DescriptionText>
         </DescriptionContainer>
+        {DummyOrderItem.map((item) => {
+          return <OrderStatusCard {...item} />;
+        })}
       </ContentContainer>
     </Container>
   );

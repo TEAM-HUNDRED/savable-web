@@ -3,10 +3,10 @@ name: CI/CD Savable Web to AWS S3
 on:
   push:
     branches:
-      - develop
+      - release
   pull_request:
     branches:
-      - develop
+      - release
     types: [closed]
 
 jobs:
