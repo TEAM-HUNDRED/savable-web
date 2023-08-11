@@ -9,29 +9,45 @@ type PropsType = {
 
 function StampContainer({ cnt, title }: PropsType) {
   const contentText = `${title} 총 ${cnt}회 인증하셨어요!\n절약해서 스탬프 쾅! 쾅! 받아가요`;
-  const numberOfGold = Math.floor(cnt / 50);
-  const numberOfSilver = Math.floor((cnt % 50) / 10);
-  const numberOfGreen = cnt % 10;
-  const totalNumberOfStamp: number =
-    numberOfGold + numberOfSilver + numberOfGreen;
 
-  const stampArray: { color: string; savedMoney: number }[] = [];
-
-  let index = 0;
-  let savedMoney = 0;
-
-  for (index = 0; index < totalNumberOfStamp; index++) {
-    if (index < numberOfGold) {
-      savedMoney += 50 * 1500;
-      stampArray.push({ color: "#ffd15b", savedMoney: savedMoney });
-    } else if (index < numberOfGold + numberOfSilver) {
-      savedMoney += 10 * 1500;
-      stampArray.push({ color: "#CFCFCF", savedMoney: savedMoney });
-    } else {
-      savedMoney += 1500;
-      stampArray.push({ color: "#9BBE0F", savedMoney: savedMoney });
-    }
-  }
+  const stampArray = [
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+    {
+      date: "08.08",
+      cnt: "1회",
+    },
+  ];
 
   const numberOfColumns = Math.floor((window.innerWidth - 50) / 51);
 
@@ -51,8 +67,8 @@ function StampContainer({ cnt, title }: PropsType) {
               return (
                 <StampCard
                   key={`${item} - ${idx}`}
-                  savedMoney={item.savedMoney}
-                  color={item.color}
+                  date={item.date}
+                  cnt={item.cnt}
                 />
               );
             })}
