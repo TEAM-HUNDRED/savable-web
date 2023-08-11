@@ -56,7 +56,7 @@ function StampContainer({ cnt, title }: PropsType) {
 
   return (
     <Container>
-      <TitleText>{`주간 인증 스탬프`}</TitleText>
+      <TitleText>{`인증 스탬프`}</TitleText>
       <ContentText>{contentText}</ContentText>
       {rowArray.map((item, idx) => {
         const startOfSlice = idx * numberOfColumns;
