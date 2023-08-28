@@ -14,9 +14,36 @@ export type GiftCardPropsType = {
   image: string;
 };
 
+export type UserChallengePropsType = {
+  title: string;
+  savedMoney: number;
+  reward: number;
+  username: string;
+  cnt: number;
+};
+
 export type ParticipatedChallengePropsType = {
   challengeId: number;
   certificationCnt: number;
   startDate: string;
   endDate: null;
+};
+
+export type UserRankingPropsType = {
+  username: string;
+  certRank: number;
+  certNum: number;
+  gap: number;
+  savedMoney: number;
+};
+
+export type RankingPropsType = {
+  username: string;
+  certRank: number;
+};
+
+export type MemberInfoPropsType = {
+  savedMoney: number;
+  reward: number;
+  username: string;
 };

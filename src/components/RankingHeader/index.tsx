@@ -1,22 +1,32 @@
 import { Images } from "assets/images";
 import styled from "styled-components";
 
-function RankingHeader() {
+import { UserRankingPropsType } from "types/view";
+
+function RankingHeader({
+  certRank,
+  certNum,
+  gap,
+  savedMoney,
+  username,
+}: UserRankingPropsType) {
   const rankingData = [
-    { title: "절약 금액", content: "50,000원" },
-    { title: "인증 횟수", content: "6회" },
-    { title: "이번 주 랭킹", content: "5위" },
+    { title: "절약 금액", content: `${savedMoney.toLocaleString()}원` },
+    { title: "인증 횟수", content: `${certNum}회` },
+    { title: "이번 주 랭킹", content: `${certRank}위` },
   ];
 
-  const money = "10,000원";
-  const numberOfRank = "5";
-  const descriptionText = `${money}만 절약하면 ${numberOfRank}등이에요!\nSavable과 함께 조금 더 힘내봐요☺️`;
+  const nextRank = certRank - 1;
+
+  const descriptionText = `${gap.toLocaleString()}원 절약하면 ${nextRank}등이에요!\nSavable과 함께 조금 더 힘내봐요☺️`;
+  const BestDescriptionText = `와우! ${certRank}등이에요! 아직까지 이번주 MVP에요!\n1등 유지까지 Savable과 함께 조금 더 힘내봐요☺️`;
 
   return (
     <Container>
+      <TitleText>{`세이버 ${username}님의 이번 주 랭킹`}</TitleText>
       <ContentContainer>
         <MedalContainer>
-          <RankingText>{numberOfRank}</RankingText>
+          <RankingText>{certRank}</RankingText>
           <MedalImage src={Images.medal} />
         </MedalContainer>
         {rankingData.map((item) => {
@@ -30,7 +40,9 @@ function RankingHeader() {
       </ContentContainer>
       <DescriptionContainer>
         <RedMedalImage src={Images.redMedal} />
-        <DescriptionText>{descriptionText}</DescriptionText>
+        <DescriptionText>
+          {nextRank ? descriptionText : BestDescriptionText}
+        </DescriptionText>
       </DescriptionContainer>
     </Container>
   );
@@ -40,6 +52,14 @@ const Container = styled.div`
   width: 100%;
   margin-top: 20px;
   box-sizing: border-box;
+  padding: 0px 24px;
+`;
+
+const TitleText = styled.p`
+  margin: 0px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: 700;
 `;
 
 const MedalContainer = styled.div`

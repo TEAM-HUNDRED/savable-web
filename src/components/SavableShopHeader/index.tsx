@@ -1,5 +1,6 @@
 import { Icons } from "assets/icons";
 import { Images } from "assets/images";
+import SBBar from "components/common/SBBar";
 import styled from "styled-components";
 
 type PropsType = {
@@ -9,8 +10,9 @@ type PropsType = {
 };
 
 function SavableShopHeader({ savedMoney, reward, username }: PropsType) {
-  const currentMonth = new Date().getMonth() + 1;
-  const descriptionText = `${currentMonth}월에 ${savedMoney.toLocaleString()}원 절약하고\n${reward.toLocaleString()}원 받았어요!`;
+  // const currentMonth = new Date().getMonth() + 1;
+  const descriptionText = `지금까지 ${savedMoney.toLocaleString()}원 절약하고\n${reward.toLocaleString()}원 받았어요!`;
+  const warningText = `기프티콘 신청 후 즉시 발급되지 않습니다.\n신청 이후 승인, 전송까지 최대 2주 소요되니 참고 부탁드립니다:D`;
 
   return (
     <Container>
@@ -21,9 +23,18 @@ function SavableShopHeader({ savedMoney, reward, username }: PropsType) {
           <SavedMoneyText>{`${reward.toLocaleString()}원`}</SavedMoneyText>
         </ContentContainer>
       </SavedMoneyContainer>
+      <SBBar
+        title={"기프티콘 주문 현황 보러 가기"}
+        pathName={"/savable_shop/order_history"}
+        icon={Icons.SvgElement.giftIcon}
+      />
       <DescriptionContainer>
         <CoinIcon fill="#9bbe0f" width="24" height={"24"} />
         <DescriptionText>{descriptionText}</DescriptionText>
+      </DescriptionContainer>
+      <DescriptionContainer>
+        <WarningIcon fill="#ffaea5" width="24" height={"24"} />
+        <DescriptionText>{warningText}</DescriptionText>
       </DescriptionContainer>
     </Container>
   );
@@ -46,6 +57,7 @@ const SavedMoneyContainer = styled.div`
   width: 100%;
   align-items: center;
   justify-content: center;
+  margin-bottom: 12px;
 `;
 
 const ContentContainer = styled.div`
@@ -84,11 +96,15 @@ const DescriptionContainer = styled.div`
   padding: 10px;
   background-color: #e8e8e8;
   border-radius: 16px;
-  margin: 16px 0px;
+  margin: 4px 0px;
   box-sizing: border-box;
 `;
 
 const CoinIcon = styled(Icons.SvgElement.coinIcon)`
+  margin-right: 8px;
+`;
+
+const WarningIcon = styled(Icons.SvgElement.warningIcon)`
   margin-right: 8px;
 `;
 

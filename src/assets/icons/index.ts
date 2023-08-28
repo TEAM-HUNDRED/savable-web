@@ -4,6 +4,9 @@ import { ReactComponent as HomeIcon } from "./ic_home.svg";
 import { ReactComponent as PlusIcon } from "./ic_plus.svg";
 import { ReactComponent as CoinIcon } from "./ic_coin.svg";
 import { ReactComponent as GiftIcon } from "./ic_gift.svg";
+import { ReactComponent as LeftArrowIcon } from "./ic_left_arrow.svg";
+import { ReactComponent as WarningIcon } from "./ic_warning.svg";
+import { ReactComponent as RightArrowIcon } from "./ic_right_arrow.svg";
 
 export const Icons = {
   SvgElement: {
@@ -13,5 +16,8 @@ export const Icons = {
     plusIcon: PlusIcon,
     coinIcon: CoinIcon,
     giftIcon: GiftIcon,
+    leftArrowIcon: LeftArrowIcon,
+    warningIcon: WarningIcon,
+    rightArrowIcon: RightArrowIcon,
   },
 };

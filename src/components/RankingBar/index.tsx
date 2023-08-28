@@ -11,7 +11,7 @@ function RankingBar({ rank, userName, highlighted }: TypeProps) {
     <Container highlighted={highlighted}>
       <Text>{`${rank}위`}</Text>
       <Divider />
-      <Text>{`${userName}님`}</Text>
+      <Text>{`${userName} 세이버님`}</Text>
     </Container>
   );
 }

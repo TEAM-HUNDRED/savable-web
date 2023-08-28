@@ -2,17 +2,16 @@ import { Icons } from "assets/icons";
 import styled from "styled-components";
 
 type PropsType = {
-  savedMoney: string;
-  color: string;
+  date: string;
+  cnt: string;
 };
 
-function StampCard({ savedMoney, color }: PropsType) {
-  const CoinIcons = Icons.SvgElement.coinIcon;
-  const contentText = `${savedMoney}\n 절약 성공!`;
+function StampCard({ date, cnt }: PropsType) {
   return (
     <Container>
-      <CoinIcons fill={color} />
-      <ContentText>{contentText}</ContentText>
+      <ContentText>{date}</ContentText>
+      <CoinIcon width={28} height={28} fill={"#9BBE0F"} />
+      <ContentText>{cnt}</ContentText>
     </Container>
   );
 }
@@ -20,25 +19,27 @@ function StampCard({ savedMoney, color }: PropsType) {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50px;
-  height: 60px;
   justify-content: center;
   align-items: center;
   align-content: center;
   border: 1px solid #e8e8e8;
   border-radius: 8px;
-  padding: 6px 0px;
+  padding: 6px 8px;
   margin: 4px 4px 0px 0px;
 `;
 
 const ContentText = styled.p`
-  font-size: 6px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 800;
   color: #757575;
   margin: 0px;
   margin-top: 6px;
   white-space: pre-line;
   text-align: center;
+`;
+
+const CoinIcon = styled(Icons.SvgElement.coinIcon)`
+  margin: 6px 0px;
 `;
 
 export default StampCard;

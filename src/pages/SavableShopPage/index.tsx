@@ -1,23 +1,33 @@
-import { useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 import Api from "lib/api/Api";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
+import { Amplitude } from "lib/hooks";
+
 import { GiftCardPropsType, MemberPropsType } from "types/view";
 
 import SavableShopHeader from "components/SavableShopHeader";
 import GiftCardContainer from "container/GiftCardContainer";
 
-const kakaoId =
-  "ee3cdb725f00f08b669a230710dc0360d9697c4fa88aecae44b37508e6d656ea50";
-
 function SavableShopPage() {
+  const location = useLocation();
+  const paramKakaoId = new URLSearchParams(location.search).get(
+    "kakaoId"
+  ) as string;
+
+  const { updateKakaoId, kakaoId: currentKakaoId } = useContext(KakaoIdContext);
+
+  const kakaoId = paramKakaoId ?? currentKakaoId;
+
   const [userData, setUserData] = useState<MemberPropsType>();
   const [giftIconList, setGiftIconList] = useState<{
     [key: string]: GiftCardPropsType[];
   }>();
   const [giftPriceRageArray, setPriceRangeArray] = useState<string[]>([]);
 
-  const getGiftCardList = async () => {
+  const getGiftCardList = useCallback(async () => {
     try {
       const response = await Api.shared.getGifticonList(kakaoId);
 
@@ -27,11 +37,17 @@ function SavableShopPage() {
     } catch (error) {
       console.log(error);
     }
-  };
+  }, [kakaoId]);
 
   useEffect(() => {
-    getGiftCardList();
-  }, []);
+    if (!currentKakaoId) updateKakaoId(paramKakaoId);
+
+    Amplitude.logView("savable_shop");
+
+    setTimeout(() => {
+      getGiftCardList();
+    }, 1000);
+  }, [location, currentKakaoId, paramKakaoId, updateKakaoId, getGiftCardList]);
 
   if (!userData || !giftIconList) return <></>;
 
@@ -50,6 +66,8 @@ function SavableShopPage() {
               key={`${item}-${idx}`}
               priceRange={Number(item)}
               giftCardList={giftIconList[item]}
+              userReward={userData.reward}
+              kakaoId={kakaoId}
             />
           );
         })}
@@ -67,6 +85,7 @@ const Divider = styled.div`
   width: 100%;
   background-color: #cfcfcf;
   margin: 4px 0px;
+  margin-top: 16px;
 `;
 
 const GiftContainer = styled.div`
