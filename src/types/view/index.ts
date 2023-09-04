@@ -20,6 +20,7 @@ export type UserChallengePropsType = {
   reward: number;
   username: string;
   cnt: number;
+  challengeId: number;
 };
 
 export type ParticipatedChallengePropsType = {

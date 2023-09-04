@@ -16,6 +16,7 @@ function ChallengeCard({
   reward,
   username,
   cnt,
+  challengeId,
   onClickCertificationButton,
   onClickDetailButton,
 }: PropsType) {
@@ -26,6 +27,7 @@ function ChallengeCard({
       reward: reward,
       username: username,
       cnt: cnt,
+      challengeId: challengeId,
     });
   };
 
