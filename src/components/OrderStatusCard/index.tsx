@@ -52,15 +52,15 @@ function OrderStatusCard({
     { index: "가격", value: `${price.toLocaleString()}원` },
   ];
 
-  const statusColor = (status === "승인 대기" && {
-    backgroundColor: " #E9F9AC",
+  const statusColor = (status === "승인대기" && {
+    backgroundColor: "#ffaea5",
     fontColor: "#000",
   }) ||
-    (status === "발송 준비" && {
-      backgroundColor: " #E9F9AC",
+    (status === "발송준비" && {
+      backgroundColor: " #9bbe0f",
       fontColor: "#000",
     }) ||
-    (status === "발송 완료" && {
+    (status === "발송완료" && {
       backgroundColor: " #E9F9AC",
       fontColor: "#000",
     }) || { backgroundColor: " #E9F9AC", fontColor: "#000" };
@@ -96,6 +96,7 @@ const Container = styled.div`
   flex-direction: row;
   width: 100%;
   padding: 12px;
+  margin: 8px 0px;
   align-items: center;
   justify-content: center;
   border: 1px solid #e8e8e8;
@@ -128,6 +129,8 @@ const TitleContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
+  align-items: start;
+  margin-bottom: 8px;
 `;
 
 const WrapperContainer = styled.div`
@@ -143,11 +146,11 @@ const StatusContainer = styled.div<{
   backgroundColor: string;
   fontColor: string;
 }>`
-  width: 56px;
-  height: 16px;
-  padding: 8px 16px;
+  height: 12px;
+  padding: 4px 8px;
+  margin-bottom: 8px;
   border-radius: 24px;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   align-item: center;
   justify-content: center;
