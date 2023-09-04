@@ -20,6 +20,7 @@ export type UserChallengePropsType = {
   reward: number;
   username: string;
   cnt: number;
+  challengeId: number;
 };
 
 export type ParticipatedChallengePropsType = {
@@ -46,4 +47,9 @@ export type MemberInfoPropsType = {
   savedMoney: number;
   reward: number;
   username: string;
+};
+
+export type UserChallengeCertList = {
+  date: string;
+  count: number;
 };

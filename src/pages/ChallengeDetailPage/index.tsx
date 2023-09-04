@@ -1,20 +1,31 @@
-import { useEffect } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import styled from "styled-components";
 
 import { Amplitude } from "lib/hooks";
-import { UserChallengePropsType } from "types/view";
+import { UserChallengeCertList, UserChallengePropsType } from "types/view";
 import { Icons } from "assets/icons";
 import { Images } from "assets/images";
 
 import StampContainer from "container/StampContainer";
 import BottomNavigationBar from "components/BottomNavigationBar";
 
+import Api from "lib/api/Api";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
+
 function ChallengeDetailPage() {
   const location = useLocation();
+  const [certList, setCertList] = useState<UserChallengeCertList[]>();
 
-  const { title, savedMoney, reward, cnt }: UserChallengePropsType =
-    location.state.props;
+  const {
+    title,
+    savedMoney,
+    reward,
+    cnt,
+    challengeId,
+  }: UserChallengePropsType = location.state.props;
+
+  const { kakaoId: currentKakaoId } = useContext(KakaoIdContext);
 
   const challengeStatus = [
     {
@@ -32,9 +43,19 @@ function ChallengeDetailPage() {
   const titleText = `${title}로 \n ${savedMoney.toLocaleString()}원 아끼고 ${reward.toLocaleString()}원 벌었어요`;
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
 
+  const getUserChallengeCertList = useCallback(async () => {
+    const response = await Api.shared.getUserChallengeCertList(
+      currentKakaoId,
+      challengeId
+    );
+
+    setCertList(response.data);
+  }, [currentKakaoId, challengeId]);
+
   useEffect(() => {
     Amplitude.logView(`challenge_detail_${title}`);
-  }, [title]);
+    getUserChallengeCertList();
+  }, [title, getUserChallengeCertList]);
 
   return (
     <Container>
@@ -62,7 +83,9 @@ function ChallengeDetailPage() {
             );
           })}
         </ChallengeContainer>
-        <StampContainer cnt={cnt} title={title} />
+        {certList && (
+          <StampContainer cnt={cnt} title={title} certList={certList} />
+        )}
       </ContentContainer>
       <BottomNavigationBar />
     </Container>

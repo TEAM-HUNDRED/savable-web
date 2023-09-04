@@ -1,58 +1,37 @@
 import styled from "styled-components";
 
 import StampCard from "components/StampCard";
+import { UserChallengeCertList } from "types/view";
 
 type PropsType = {
   cnt: number;
   title: string;
+  certList: UserChallengeCertList[];
 };
 
-function StampContainer({ cnt, title }: PropsType) {
+function StampContainer({ cnt, title, certList }: PropsType) {
   const contentText = `${title} 총 ${cnt}회 인증하셨어요!\n절약해서 스탬프 쾅! 쾅! 받아가요`;
-
-  const stampArray = [
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-    {
-      date: "08.08",
-      cnt: "1회",
-    },
-  ];
 
   const numberOfColumns = Math.floor((window.innerWidth - 50) / 51);
 
-  const number = Math.ceil(stampArray.length / numberOfColumns);
+  const number = Math.ceil(certList.length / numberOfColumns);
   const rowArray = new Array(number).fill(undefined).map((val, idx) => idx);
+
+  const calculateDate = (date: string) => {
+    const currentDate = new Date(date);
+
+    const getMonthString =
+      currentDate.getMonth() > 9
+        ? `${currentDate.getMonth() + 1}`
+        : `0${currentDate.getMonth() + 1}`;
+
+    const getUTCDateString =
+      currentDate.getUTCDate() > 10
+        ? `${currentDate.getUTCDate()}`
+        : `0${currentDate.getUTCDate()}`;
+
+    return `${getMonthString}.${getUTCDateString}`;
+  };
 
   return (
     <Container>
@@ -61,14 +40,15 @@ function StampContainer({ cnt, title }: PropsType) {
       {rowArray.map((item, idx) => {
         const startOfSlice = idx * numberOfColumns;
         const endOfSlice = (idx + 1) * numberOfColumns;
+
         return (
           <StampListContainer key={`${item} - ${idx}`}>
-            {stampArray.slice(startOfSlice, endOfSlice).map((item, idx) => {
+            {certList.slice(startOfSlice, endOfSlice).map((item, idx) => {
               return (
                 <StampCard
                   key={`${item} - ${idx}`}
-                  date={item.date}
-                  cnt={item.cnt}
+                  date={calculateDate(item.date)}
+                  cnt={`${item.count}회`}
                 />
               );
             })}
