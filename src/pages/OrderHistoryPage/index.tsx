@@ -1,24 +1,42 @@
-import { Icons } from "assets/icons";
-import OrderStatusCard from "components/OrderStatusCard";
+import { useCallback, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+
+import { Icons } from "assets/icons";
+import OrderStatusCard from "components/OrderStatusCard";
+import { KakaoIdContext } from "lib/context/KakaoIdContext";
+import Api from "lib/api/Api";
+import { UserOrderPropsType } from "types/view";
 
 function OrderHistoryPage() {
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
 
   const warningText = `기프티콘 신청 현황이 "발송 준비"가 되면\n기프티콘 전송이 1일 이내 완료됩니다.`;
 
-  const DummyOrderItem = [
-    {
-      title: "아이템 명",
-      imageUrl:
-        "https://chatbot-budket.s3.ap-northeast-2.amazonaws.com/giftcard/giftcard-3.png",
-      status: "승인 대기",
-      date: "일자",
-      amountOfGift: 2,
-      totalPrice: 2000,
-    },
-  ];
+  const { kakaoId: currentKakaoId } = useContext(KakaoIdContext);
+
+  const [orderList, setOrderList] = useState<UserOrderPropsType[]>([]);
+
+  const getUserOrderList = useCallback(async () => {
+    const response = await Api.shared.getUserOrderList(currentKakaoId);
+
+    response.data.sort((a, b) => {
+      if (a.orderDate < b.orderDate) {
+        return 1;
+      }
+      if (a.orderDate > b.orderDate) {
+        return -1;
+      }
+
+      return 0;
+    });
+
+    setOrderList(response.data);
+  }, [currentKakaoId]);
+
+  useEffect(() => {
+    getUserOrderList();
+  }, [getUserOrderList]);
 
   return (
     <Container>
@@ -34,9 +52,13 @@ function OrderHistoryPage() {
           <WarningIcon fill="#ffaea5" width="24" height={"24"} />
           <DescriptionText>{warningText}</DescriptionText>
         </DescriptionContainer>
-        {DummyOrderItem.map((item) => {
-          return <OrderStatusCard {...item} />;
-        })}
+        {orderList.length === 0 ? (
+          <></>
+        ) : (
+          orderList.map((item) => {
+            return <OrderStatusCard {...item} />;
+          })
+        )}
       </ContentContainer>
     </Container>
   );

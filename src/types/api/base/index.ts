@@ -16,6 +16,15 @@ export type CreateOrderGiftPayload = {
   negativePoints: string;
 };
 
+export type UserOrderList = {
+  productName: string;
+  orderDate: string;
+  quantity: number;
+  price: number;
+  image: string;
+  status: string;
+}[];
+
 export type MemberApiResponse = {
   savedMoney: number;
   reward: number;

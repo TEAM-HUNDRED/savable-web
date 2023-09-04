@@ -7,6 +7,15 @@ export type MemberPropsType = {
   participationList: ParticipatedChallengePropsType[];
 };
 
+export type UserOrderPropsType = {
+  productName: string;
+  orderDate: string;
+  quantity: number;
+  price: number;
+  image: string;
+  status: string;
+};
+
 export type GiftCardPropsType = {
   id: number;
   name: string;
