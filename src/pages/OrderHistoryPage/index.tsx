@@ -19,7 +19,17 @@ function OrderHistoryPage() {
 
   const getUserOrderList = useCallback(async () => {
     const response = await Api.shared.getUserOrderList(currentKakaoId);
-    console.log(response.data);
+
+    response.data.sort((a, b) => {
+      if (a.orderDate < b.orderDate) {
+        return 1;
+      }
+      if (a.orderDate > b.orderDate) {
+        return -1;
+      }
+
+      return 0;
+    });
 
     setOrderList(response.data);
   }, [currentKakaoId]);
