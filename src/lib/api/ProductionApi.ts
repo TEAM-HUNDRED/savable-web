@@ -64,6 +64,12 @@ export default class ProductionApi implements ISVApi {
     return data;
   };
 
+  public getUserOrderList = async (kakaoId: string) => {
+    const data = await this._axios.get(`gift-histories/${kakaoId}`);
+
+    return data;
+  };
+
   public getUserSavingStatus = async (kakaoId: string) => {
     const data = await this._axios.get(`main?kakaoId=${kakaoId}`);
 

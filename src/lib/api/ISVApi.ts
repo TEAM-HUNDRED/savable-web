@@ -7,6 +7,7 @@ import {
   RankingApiResponse,
   UserChallengeApiResponse,
   UserChallengeCertListResponse,
+  UserOrderList,
 } from "types/api/base";
 
 export type ISVApi = {
@@ -33,6 +34,8 @@ export type ISVApi = {
     kakaoId: string,
     challegneId: number
   ): Promise<AxiosResponse<UserChallengeCertListResponse>>;
+
+  getUserOrderList(kakaoId: string): Promise<AxiosResponse<UserOrderList>>;
 
   getUserSavingStatus(
     kakaoId: string
