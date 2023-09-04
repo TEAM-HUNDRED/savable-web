@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 import { UserChallengePropsType } from "types/view";
 
-import { Images } from "assets/images";
 import SVButton from "components/SVButton";
 
 type PropsType = UserChallengePropsType & {
@@ -33,20 +32,17 @@ function ChallengeCard({
 
   return (
     <Container>
-      <HeaderContainer>
-        <ChallengeImage src={Images.coffee} />
-        <ChallengeContainer>
-          <TitleText>{title}</TitleText>
-          <ContentContainer>
-            <ContentText>{`현재 절약 금액`}</ContentText>
-            <ContentText>{`${savedMoney}원`}</ContentText>
-          </ContentContainer>
-          <ContentContainer>
-            <ContentText>{`수령 리워드액`}</ContentText>
-            <ContentText>{`${reward}원`}</ContentText>
-          </ContentContainer>
-        </ChallengeContainer>
-      </HeaderContainer>
+      <ChallengeContainer>
+        <TitleText>{title}</TitleText>
+        <ContentContainer>
+          <ContentText>{`현재 절약 금액`}</ContentText>
+          <ContentText>{`${savedMoney}원`}</ContentText>
+        </ContentContainer>
+        <ContentContainer>
+          <ContentText>{`수령 리워드액`}</ContentText>
+          <ContentText>{`${reward}원`}</ContentText>
+        </ContentContainer>
+      </ChallengeContainer>
       <ButtonContainer>
         <SVButton
           buttonText="인증하기"
@@ -74,24 +70,10 @@ const Container = styled.div`
   box-sizing: border-box;
 `;
 
-const HeaderContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-`;
-
 const ChallengeContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`;
-
-const ChallengeImage = styled.img`
-  width: 36px;
-  height: 36px;
-  border-radius: 18px;
-  border: 1px solid #e8e8e8;
-  margin: 4px 10px 0px 0px;
 `;
 
 const TitleText = styled.p`
