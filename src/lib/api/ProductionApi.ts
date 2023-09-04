@@ -53,6 +53,17 @@ export default class ProductionApi implements ISVApi {
     return data;
   };
 
+  public getUserChallengeCertList = async (
+    kakaoId: string,
+    challengeId: number
+  ) => {
+    const data = await this._axios.get(
+      `challenges/${challengeId}/users/${kakaoId}`
+    );
+
+    return data;
+  };
+
   public getUserSavingStatus = async (kakaoId: string) => {
     const data = await this._axios.get(`main?kakaoId=${kakaoId}`);
 

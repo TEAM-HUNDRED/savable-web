@@ -46,6 +46,11 @@ export type UserChallengeApiResponse = {
   challengeId: number;
 }[];
 
+export type UserChallengeCertListResponse = {
+  date: string;
+  count: number;
+}[];
+
 export type PrivateRankingInfo = {
   username: string;
   certRank: number;
