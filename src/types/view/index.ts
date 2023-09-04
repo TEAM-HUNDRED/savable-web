@@ -48,3 +48,8 @@ export type MemberInfoPropsType = {
   reward: number;
   username: string;
 };
+
+export type UserChallengeCertList = {
+  date: string;
+  count: number;
+};
