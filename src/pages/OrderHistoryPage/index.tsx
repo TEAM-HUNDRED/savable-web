@@ -11,7 +11,7 @@ import { UserOrderPropsType } from "types/view";
 function OrderHistoryPage() {
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
 
-  const warningText = `기프티콘 신청 현황이 "발송 준비"가 되면\n기프티콘 전송이 1일 이내 완료됩니다.`;
+  const warningText = `기프티콘 신청 현황이 "발송 완료"가 되면\n기프티콘 전송이 1일 이내 완료됩니다.`;
 
   const { kakaoId: currentKakaoId } = useContext(KakaoIdContext);
 
