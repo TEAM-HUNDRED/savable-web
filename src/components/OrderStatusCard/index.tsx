@@ -25,25 +25,25 @@ function OrderStatusCard({
         ? `${currentDate.getMonth() + 1}`
         : `0${currentDate.getMonth() + 1}`;
 
-    const getUTCDateString =
-      currentDate.getUTCDate() > 10
-        ? `${currentDate.getUTCDate()}`
-        : `0${currentDate.getUTCDate()}`;
+    const getDateString =
+      currentDate.getDate() >= 10
+        ? `${currentDate.getDate()}`
+        : `0${currentDate.getDate()}`;
 
-    const getDay = currentDate.getUTCDay();
+    const getDay = currentDate.getDay();
     const day = ["일", "월", "화", "수", "목", "금", "토"];
 
     const getHour =
-      currentDate.getUTCHours() > 10
-        ? `${currentDate.getUTCHours()}`
-        : `0${currentDate.getUTCHours()}`;
+      currentDate.getHours() >= 10
+        ? `${currentDate.getHours()}`
+        : `0${currentDate.getHours()}`;
 
     const getMinutes =
-      currentDate.getUTCMinutes() > 10
-        ? `${currentDate.getUTCMinutes()}`
-        : `0${currentDate.getUTCMinutes()}`;
+      currentDate.getMinutes() >= 10
+        ? `${currentDate.getMinutes()}`
+        : `0${currentDate.getMinutes()}`;
 
-    return `${getMonthString}.${getUTCDateString}(${day[getDay]}) ${getHour}:${getMinutes}`;
+    return `${getMonthString}.${getDateString}(${day[getDay]}) ${getHour}:${getMinutes}`;
   };
 
   const contentArray = [

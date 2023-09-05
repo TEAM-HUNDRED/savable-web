@@ -4,13 +4,12 @@ import StampCard from "components/StampCard";
 import { UserChallengeCertList } from "types/view";
 
 type PropsType = {
-  cnt: number;
   title: string;
   certList: UserChallengeCertList[];
 };
 
-function StampContainer({ cnt, title, certList }: PropsType) {
-  const contentText = `${title} 총 ${cnt}회 인증하셨어요!\n절약해서 스탬프 쾅! 쾅! 받아가요`;
+function StampContainer({ title, certList }: PropsType) {
+  const contentText = `${title} 총 ${certList.length}회 인증하셨어요!\n절약해서 스탬프 쾅! 쾅! 받아가요`;
 
   const numberOfColumns = Math.floor((window.innerWidth - 50) / 51);
 
@@ -25,17 +24,17 @@ function StampContainer({ cnt, title, certList }: PropsType) {
         ? `${currentDate.getMonth() + 1}`
         : `0${currentDate.getMonth() + 1}`;
 
-    const getUTCDateString =
-      currentDate.getUTCDate() > 10
-        ? `${currentDate.getUTCDate()}`
-        : `0${currentDate.getUTCDate()}`;
+    const getDateString =
+      currentDate.getDate() > 10
+        ? `${currentDate.getDate()}`
+        : `0${currentDate.getDate()}`;
 
-    return `${getMonthString}.${getUTCDateString}`;
+    return `${getMonthString}.${getDateString}`;
   };
 
   return (
     <Container>
-      <TitleText>{`인증 스탬프`}</TitleText>
+      <TitleText>{`주간 인증 스탬프`}</TitleText>
       <ContentText>{contentText}</ContentText>
       {rowArray.map((item, idx) => {
         const startOfSlice = idx * numberOfColumns;

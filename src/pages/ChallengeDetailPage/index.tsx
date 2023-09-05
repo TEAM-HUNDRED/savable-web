@@ -17,13 +17,8 @@ function ChallengeDetailPage() {
   const location = useLocation();
   const [certList, setCertList] = useState<UserChallengeCertList[]>();
 
-  const {
-    title,
-    savedMoney,
-    reward,
-    cnt,
-    challengeId,
-  }: UserChallengePropsType = location.state.props;
+  const { title, savedMoney, reward, challengeId }: UserChallengePropsType =
+    location.state.props;
 
   const { kakaoId: currentKakaoId } = useContext(KakaoIdContext);
 
@@ -57,6 +52,8 @@ function ChallengeDetailPage() {
     getUserChallengeCertList();
   }, [title, getUserChallengeCertList]);
 
+  console.log(certList);
+
   return (
     <Container>
       <HeaderContainer>
@@ -83,9 +80,7 @@ function ChallengeDetailPage() {
             );
           })}
         </ChallengeContainer>
-        {certList && (
-          <StampContainer cnt={cnt} title={title} certList={certList} />
-        )}
+        {certList && <StampContainer title={title} certList={certList} />}
       </ContentContainer>
       <BottomNavigationBar />
     </Container>
