@@ -1,3 +1,4 @@
+import { Amplitude } from "lib/hooks";
 import styled from "styled-components";
 
 type PropsType = {
@@ -66,7 +67,14 @@ function OrderStatusCard({
     }) || { backgroundColor: " #E9F9AC", fontColor: "#000" };
 
   return (
-    <Container>
+    <Container
+      onClick={() =>
+        Amplitude.logClick({
+          buttonName: `click_order_history_item_${productName}`,
+          currentRouteName: "order_history",
+        })
+      }
+    >
       <GiftImage src={image} />
       <ContentContainer>
         <TitleContainer>

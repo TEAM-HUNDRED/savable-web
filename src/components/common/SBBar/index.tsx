@@ -1,5 +1,6 @@
 import { Icons } from "assets/icons";
-import { Link } from "react-router-dom";
+import { Amplitude } from "lib/hooks";
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 type PropsType = {
@@ -10,8 +11,19 @@ type PropsType = {
 
 function SBBar({ title, icon, pathName }: PropsType) {
   const BarIcon = icon;
+  const location = useLocation();
+  const basicPath = "/" + location.pathname.split("/")[1];
+
   return (
-    <Container to={pathName}>
+    <Container
+      to={pathName}
+      onClick={() =>
+        Amplitude.logClick({
+          buttonName: `navigate_to_${pathName}_bar`,
+          currentRouteName: basicPath,
+        })
+      }
+    >
       <TitleContainer>
         <BarIcon />
         <TitleText>{title}</TitleText>
