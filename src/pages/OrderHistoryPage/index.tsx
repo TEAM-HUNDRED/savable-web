@@ -7,6 +7,7 @@ import OrderStatusCard from "components/OrderStatusCard";
 import { KakaoIdContext } from "lib/context/KakaoIdContext";
 import Api from "lib/api/Api";
 import { UserOrderPropsType } from "types/view";
+import { Amplitude } from "lib/hooks";
 
 function OrderHistoryPage() {
   const LeftArrowIcon = Icons.SvgElement.leftArrowIcon;
@@ -37,6 +38,10 @@ function OrderHistoryPage() {
   useEffect(() => {
     getUserOrderList();
   }, [getUserOrderList]);
+
+  useEffect(() => {
+    Amplitude.logView("order_history");
+  }, []);
 
   return (
     <Container>
